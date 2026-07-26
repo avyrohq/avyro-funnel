@@ -1,0 +1,217 @@
+:root {
+  --primary: #3b82f6;        /* Azul tech */
+  --primary-hover: #2563eb;  
+  --accent: #10b981;         /* Verde éxito */
+  --bg-dark: #0f172a;        /* Fondo oscuro azulado */
+  --card-bg: #1e293b;        /* Fondo de tarjetas */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --yellow: #f59e0b;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  background-color: var(--bg-dark);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Bar de urgencia */
+.top-bar {
+  background-color: #0284c7;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+#countdown {
+  color: var(--yellow);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-left: 5px;
+}
+
+/* Hero Section */
+.hero {
+  padding: 40px 0 20px 0;
+}
+
+.brand-name {
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.3rem;
+  color: var(--text-main);
+  line-height: 1.25;
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+.highlight {
+  color: var(--primary);
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Video Container */
+.video-container {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.video-placeholder {
+  background: var(--card-bg);
+  border: 2px dashed #334155;
+  border-radius: 12px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--yellow);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-weight: bold;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+}
+
+/* Botón CTA */
+.cta-button {
+  display: inline-block;
+  background-color: var(--accent);
+  color: white;
+  padding: 20px 36px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+  transition: transform 0.2s, background-color 0.2s;
+  animation: pulse 2.5s infinite;
+}
+
+.cta-button:hover {
+  background-color: #059669;
+}
+
+.sub-cta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Beneficios */
+.benefits {
+  padding: 50px 0;
+}
+
+.benefits h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.benefit-card {
+  background: var(--card-bg);
+  padding: 25px;
+  border-radius: 12px;
+  border-top: 4px solid var(--primary);
+  text-align: left;
+}
+
+.benefit-card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.benefit-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Garantía */
+.guarantee {
+  padding: 40px 0;
+}
+
+.guarantee-box {
+  background: var(--card-bg);
+  border: 1px solid #334155;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.guarantee-box h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+
+.guarantee-box p {
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid #334155;
+  padding: 20px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Adaptación Mobile */
+@media (max-width: 600px) {
+  h1 { font-size: 1.75rem; }
+  .subtitle { font-size: 1rem; }
+  .cta-button { font-size: 1.05rem; padding: 16px 24px; width: 90%; }
+  .video-placeholder { height: 220px; }
+}

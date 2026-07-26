@@ -1,4 +1,4 @@
-// Función para inicializar y controlar el reloj de cuenta regresiva
+// Reloj de cuenta regresiva para generar urgencia
 function startTimer(duration, display) {
   let timer = duration, minutes, seconds;
   setInterval(function () {
@@ -11,16 +11,26 @@ function startTimer(duration, display) {
       display.textContent = minutes + ":" + seconds;
 
       if (--timer < 0) {
-          timer = duration; // Si llega a 0, reinicia el ciclo de 15 minutos automáticamente
+          timer = duration; // Reinicia el contador de 15 minutos al llegar a cero
       }
   }, 1000);
 }
 
-// Arranca el proceso apenas se monta la página en el navegador
 window.onload = function () {
+  // Inicializar contador de 15 minutos
   let fifteenMinutes = 60 * 15,
       display = document.querySelector('#countdown');
   if(display) {
       startTimer(fifteenMinutes, display);
+  }
+
+  // Evento para rastrear el clic al Checkout cuando tengamos el Píxel activo
+  const ctaBtn = document.getElementById('btn-checkout');
+  if(ctaBtn) {
+    ctaBtn.addEventListener('click', function() {
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout');
+      }
+    });
   }
 };
