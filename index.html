@@ -5,78 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistemas y Plantillas de IA - Avyro Digital</title>
     
-    <!-- Aquí pegaremos el Píxel de Meta en el siguiente paso -->
+    <!-- Google Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Meta Pixel irá aquí -->
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Bar de Urgencia Superior -->
+    <!-- Bar de Urgencia Flotante -->
     <div class="top-bar">
-        ⚡ OFERTA DE LANZAMIENTO — 50% DE DESCUENTO DISPONIBLE. EXPIRA EN: <span id="countdown">15:00</span>
+        <span>⚡ <strong>OFERTA DE LANZAMIENTO</strong> — 50% DE DESCUENTO DISPONIBLE. EXPIRA EN:</span>
+        <span id="countdown">15:00</span>
     </div>
 
-    <!-- Sección Principal (Hero) -->
+    <!-- Iluminación de fondo (Glow Effects) -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Hero Section -->
     <header class="hero">
         <div class="container">
-            <p class="brand-name">AVYRO DIGITAL</p>
-            <h1>Crea Sistemas y Herramientas Web con <span class="highlight">Inteligencia Artificial</span> sin Programar desde Cero</h1>
-            <p class="subtitle">Aprende a desplegar dashboards, CRMs y automatizaciones prácticas paso a paso. Código fuente y plantillas incluidas.</p>
+            <div class="badge-pill">
+                <i data-lucide="sparkles"></i>
+                <span>Revoluciona tu flujo de trabajo con IA</span>
+            </div>
             
-            <!-- Contenedor para el Video Demostrativo -->
-            <div class="video-container">
-                <div class="badge">⭐ 4.9/5 (+100 creadores y desarrolladores)</div>
-                <div class="video-placeholder">
-                    <p>🎬 [AQUÍ IRÁ EL VIDEO DEMOSTRATIVO DE PANTALLA DE TU HERRAMIENTA]</p>
+            <h1>Crea Sistemas y Web Tools con <span class="highlight-gradient">Inteligencia Artificial</span> sin programar desde cero</h1>
+            
+            <p class="subtitle">Aprende a desplegar dashboards, CRMs y automatizaciones prácticas paso a paso. Código fuente, plantillas y prompts probados incluidos.</p>
+            
+            <!-- Video Container / Demo con marco Glassmorphism -->
+            <div class="video-card-wrapper">
+                <div class="video-card">
+                    <div class="video-header">
+                        <div class="dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="video-title">demo-sistema-ia.mp4</span>
+                    </div>
+                    <div class="video-placeholder">
+                        <div class="play-btn">
+                            <i data-lucide="play"></i>
+                        </div>
+                        <p>🎬 [AQUÍ IRÁ EL VIDEO DEMOSTRATIVO DE TU HERRAMIENTA]</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Botón de Acción Principal -->
-            <a href="AQUI_IRA_TU_LINK_DE_HOTMART" id="btn-checkout" class="cta-button">
-                ¡QUIERO ACCEDER AHORA CON EL 50% DE DESCUENTO!
-            </a>
-            <p class="sub-cta">🔒 Pago 100% seguro procesado por Hotmart. Acceso inmediato.</p>
+            <!-- Botón CTA de alto impacto -->
+            <div class="cta-wrapper">
+                <a href="AQUI_IRA_TU_LINK_DE_HOTMART" id="btn-checkout" class="cta-button">
+                    <span>¡QUIERO ACCEDER AHORA CON 50% DCTO!</span>
+                    <i data-lucide="arrow-right"></i>
+                </a>
+                <div class="guarantee-micro">
+                    <i data-lucide="shield-check"></i>
+                    <span>Pago 100% seguro por Hotmart • Garantía de 7 días</span>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- Sección de Beneficios / Qué van a construir -->
+    <!-- Beneficios Grid -->
     <section class="benefits">
         <div class="container">
-            <h2>¿Qué vas a lograr y construir dentro del programa?</h2>
+            <h2 class="section-title">¿Qué vas a lograr y construir dentro del programa?</h2>
+            
             <div class="benefits-grid">
                 <div class="benefit-card">
-                    <h3>⚡ Dashboards y CRMs con IA</h3>
-                    <p>Accede a plantillas personalizables y aprende a construirlas rápidamente usando asistentes de IA.</p>
+                    <div class="icon-box blue">
+                        <i data-lucide="layout-dashboard"></i>
+                    </div>
+                    <h3>Dashboards y CRMs con IA</h3>
+                    <p>Accede a plantillas personalizables y aprende a construirlas rápidamente usando asistentes de IA en minutos.</p>
                 </div>
+
                 <div class="benefit-card">
-                    <h3>🤖 Automatizaciones Prácticas</h3>
-                    <p>Integra flujos de trabajo inteligentes para organizar datos, leads y tareas sin pagar suscripciones caras.</p>
+                    <div class="icon-box green">
+                        <i data-lucide="cpu"></i>
+                    </div>
+                    <h3>Automatizaciones Prácticas</h3>
+                    <p>Integra flujos inteligentes para organizar datos, clientes y tareas sin pagar suscripciones caras.</p>
                 </div>
+
                 <div class="benefit-card">
-                    <h3>📂 Código Fuente y Plantillas</h3>
-                    <p>Descarga directamente el código y los prompts probados para clonar y desplegar proyectos en minutos.</p>
+                    <div class="icon-box purple">
+                        <i data-lucide="code-2"></i>
+                    </div>
+                    <h3>Código Fuente y Prompts</h3>
+                    <p>Descarga directamente el código y los recursos probados para clonar y desplegar proyectos en Vercel.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Garantía -->
+    <!-- Garantía -->
     <section class="guarantee">
         <div class="container">
-            <div class="guarantee-box">
-                <h2>🛡️ Garantía Incondicional de 7 Días</h2>
-                <p>Prueba el programa y descarga los recursos. Si sientes que no cumple con tus expectativas, solicitas el reembolso dentro de la plataforma y Hotmart te devuelve el 100% de tu dinero de forma automática y sin preguntas.</p>
+            <div class="guarantee-card">
+                <div class="guarantee-icon">
+                    <i data-lucide="award"></i>
+                </div>
+                <div>
+                    <h2>Garantía Incondicional de 7 Días</h2>
+                    <p>Prueba el programa completo y descarga los recursos. Si sientes que no cumple tus expectativas, solicitas el reembolso en Hotmart y se te devuelve el 100% de tu dinero sin preguntas.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Simple -->
     <footer>
         <div class="container">
             <p>&copy; 2026 Avyro Digital. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+    <!-- Script de Íconos -->
+    <script>
+      lucide.createIcons();
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
