@@ -25,13 +25,22 @@ window.onload = function () {
       startTimer(fifteenMinutes, display);
   }
 
-  // Evento para rastrear el clic al Checkout
-  const ctaBtn = document.getElementById('btn-checkout');
-  if(ctaBtn) {
-    ctaBtn.addEventListener('click', function() {
+  // Evento para rastrear el clic al Checkout en Meta Pixel
+  const ctaButtons = document.querySelectorAll('a[href*="hotmart.com"]');
+  ctaButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout');
       }
     });
-  }
+  });
+
+  // Funcionalidad del Acordeón FAQ
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      item.classList.toggle('active');
+    });
+  });
 };
