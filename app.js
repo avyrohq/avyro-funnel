@@ -3,7 +3,6 @@ function startTimer(display) {
   const durationInSeconds = 15 * 60; // 15 minutos en segundos
   let endTime = localStorage.getItem('timerEndTime');
 
-  // Si no existe un tiempo de fin guardado o ya expiró, creamos uno nuevo
   if (!endTime || Date.now() > parseInt(endTime, 10)) {
     endTime = Date.now() + durationInSeconds * 1000;
     localStorage.setItem('timerEndTime', endTime);
@@ -15,7 +14,6 @@ function startTimer(display) {
     const now = Date.now();
     let remainingTime = Math.floor((endTime - now) / 1000);
 
-    // Si el tiempo terminó, reiniciamos el ciclo de 15 minutos
     if (remainingTime <= 0) {
       endTime = Date.now() + durationInSeconds * 1000;
       localStorage.setItem('timerEndTime', endTime);
@@ -33,9 +31,25 @@ function startTimer(display) {
     }
   }
 
-  // Ejecutar inmediatamente y luego cada segundo
   updateTimer();
   setInterval(updateTimer, 1000);
+}
+
+// Abrir Modal de Imagen Full
+function openModal(imgSrc, title) {
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('imgFull');
+  const modalTitle = document.getElementById('modalTitle');
+  
+  modal.style.display = "block";
+  modalImg.src = imgSrc;
+  modalTitle.textContent = title;
+}
+
+// Cerrar Modal
+function closeModal() {
+  const modal = document.getElementById('imageModal');
+  modal.style.display = "none";
 }
 
 window.onload = function () {

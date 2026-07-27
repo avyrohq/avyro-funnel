@@ -77,33 +77,72 @@
         </div>
     </header>
 
-    <!-- Proyectos de Ejemplo (Showcase) -->
+    <!-- Proyectos de Ejemplo con Muestras Reales -->
     <section class="projects-showcase">
         <div class="container">
-            <h2 class="section-title">Tres proyectos reales, desde cero hasta su publicación en internet</h2>
-            <p class="section-subtitle">Aprenderás a crear páginas optimizadas para distintos nichos usando prompts y herramientas gratuitas de IA.</p>
+            <h2 class="section-title">Resultados reales: Páginas que aprenderás a construir desde cero</h2>
+            <p class="section-subtitle">Haz clic en cualquier proyecto para ver la estructura completa de la landing page.</p>
             
             <div class="projects-grid">
+                <!-- Proyecto 1 -->
                 <div class="project-card">
-                    <div class="project-badge">Salud & Consultorios</div>
-                    <h3>DC - Dental Care</h3>
-                    <p>Landing page con servicios, galería, testimonios y botón directo de WhatsApp para agendar citas.</p>
+                    <div class="project-img-wrapper" onclick="openModal('assets/dental-care-full.png', 'DC - Dental Care')">
+                        <img src="assets/dental-care.png" alt="DC Dental Care Landing Page" class="project-preview">
+                        <div class="overlay">
+                            <i data-lucide="zoom-in"></i>
+                            <span>Ver página completa</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-badge">Salud & Consultorios</div>
+                        <h3>DC - Dental Care</h3>
+                        <p>Estructura optimizada con hero de alta conversión, servicios destacados, instalaciones y agendamiento directo por WhatsApp.</p>
+                    </div>
                 </div>
 
+                <!-- Proyecto 2 -->
                 <div class="project-card">
-                    <div class="project-badge">Restaurantes & Cartas</div>
-                    <h3>FG - Flame & Grill</h3>
-                    <p>Página con carta digital, fotos de platos y botón de reserva directa por WhatsApp para restaurantes.</p>
+                    <div class="project-img-wrapper" onclick="openModal('assets/flame-grill-full.png', 'FG - Flame & Grill')">
+                        <img src="assets/flame-grill.png" alt="FG Flame & Grill Landing Page" class="project-preview">
+                        <div class="overlay">
+                            <i data-lucide="zoom-in"></i>
+                            <span>Ver página completa</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-badge">Restaurantes & Gastronomía</div>
+                        <h3>FG - Flame & Grill</h3>
+                        <p>Diseño gastronómico moderno con menú destacado, sección de experiencia y reserva directa de mesa.</p>
+                    </div>
                 </div>
 
+                <!-- Proyecto 3 -->
                 <div class="project-card">
-                    <div class="project-badge">Belleza & Spas</div>
-                    <h3>GS - Glamour Studio</h3>
-                    <p>Landing con catálogo de trabajos, precios, testimonios y sistema rápido de reservas.</p>
+                    <div class="project-img-wrapper" onclick="openModal('assets/glamour-studio-full.png', 'GS - Glamour Studio')">
+                        <img src="assets/glamour-studio.png" alt="GS Glamour Studio Landing Page" class="project-preview">
+                        <div class="overlay">
+                            <i data-lucide="zoom-in"></i>
+                            <span>Ver página completa</span>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-badge">Belleza & Estética</div>
+                        <h3>GS - Glamour Studio</h3>
+                        <p>Diseño elegante enfocado en servicios de estética, catálogo visual de trabajos y reservas inmediatas.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Modal para ver imágenes full -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <h3 id="modalTitle"></h3>
+            <img class="modal-content" id="imgFull">
+        </div>
+    </div>
 
     <!-- Lo que vas a lograr -->
     <section class="benefits" id="benefits">
@@ -146,32 +185,6 @@
         </div>
     </section>
 
-    <!-- Testimonios -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Personas reales. Resultados reales.</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Me quedé sorprendida de cómo la Inteligencia Artificial creó la landing page en minutos. Mis clientes pueden hacer reservas directamente."</p>
-                    <div class="user-info">
-                        <strong>Sofía Herrera</strong>
-                        <span>Dueña de "Late Chocolate"</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Pensé que crear una página web sería complicado, pero en menos de 25 minutos ya tenía mi sitio publicado y recibí mis primeras consultas por WhatsApp."</p>
-                    <div class="user-info">
-                        <strong>Carlos Fernández</strong>
-                        <span>Emprendedor Digital</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Lo que incluye la guía -->
     <section class="content-included">
         <div class="container">
@@ -179,7 +192,7 @@
             <div class="content-list">
                 <div class="content-item"><i data-lucide="check"></i> <span>Qué es una landing page y por qué tu negocio la necesita.</span></div>
                 <div class="content-item"><i data-lucide="check"></i> <span>Herramientas de IA gratuitas para crear páginas web.</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>Prompts listos para copiar y pagar en la IA.</span></div>
+                <div class="content-item"><i data-lucide="check"></i> <span>Prompts listos para copiar y pegar en la IA.</span></div>
                 <div class="content-item"><i data-lucide="check"></i> <span>3 ejemplos reales paso a paso (Restaurante, Clínica y Spa).</span></div>
                 <div class="content-item"><i data-lucide="check"></i> <span>Cómo publicar tu landing page en internet sin pagar hosting.</span></div>
                 <div class="content-item"><i data-lucide="check"></i> <span>Estrategias directas para atraer clientes con tu nueva web.</span></div>
