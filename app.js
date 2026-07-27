@@ -45,7 +45,6 @@ function openModal(imgSrc, title) {
   modalTitle.textContent = title;
   
   modal.style.display = "block";
-  // Forzar un reflow para activar la transición CSS suave
   setTimeout(() => {
     modal.classList.add('show');
   }, 10);
@@ -58,7 +57,7 @@ function closeModal() {
   
   setTimeout(() => {
     modal.style.display = "none";
-  }, 300); // Coincide con la duración del transition en CSS
+  }, 300);
 }
 
 window.onload = function () {
