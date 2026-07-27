@@ -35,21 +35,30 @@ function startTimer(display) {
   setInterval(updateTimer, 1000);
 }
 
-// Abrir Modal de Imagen Full
+// Abrir Modal de Imagen Full con animación
 function openModal(imgSrc, title) {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('imgFull');
   const modalTitle = document.getElementById('modalTitle');
   
-  modal.style.display = "block";
   modalImg.src = imgSrc;
   modalTitle.textContent = title;
+  
+  modal.style.display = "block";
+  // Forzar un reflow para activar la transición CSS suave
+  setTimeout(() => {
+    modal.classList.add('show');
+  }, 10);
 }
 
-// Cerrar Modal
+// Cerrar Modal con animación suave
 function closeModal() {
   const modal = document.getElementById('imageModal');
-  modal.style.display = "none";
+  modal.classList.remove('show');
+  
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 300); // Coincide con la duración del transition en CSS
 }
 
 window.onload = function () {
