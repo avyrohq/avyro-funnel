@@ -1,6 +1,6 @@
-// Reloj de cuenta regresiva persistente con localStorage
+// Reloj de cuenta regresiva persistente con localStorage (Configurado a 2 días)
 function startTimer(display) {
-  const durationInSeconds = 15 * 60; // 15 minutos en segundos
+  const durationInSeconds = 2 * 24 * 60 * 60; // 2 días en segundos (172,800s)
   let endTime = localStorage.getItem('timerEndTime');
 
   if (!endTime || Date.now() > parseInt(endTime, 10)) {
@@ -20,14 +20,17 @@ function startTimer(display) {
       remainingTime = durationInSeconds;
     }
 
-    let minutes = Math.floor(remainingTime / 60);
+    let days = Math.floor(remainingTime / (24 * 3600));
+    let hours = Math.floor((remainingTime % (24 * 3600)) / 3600);
+    let minutes = Math.floor((remainingTime % 3600) / 60);
     let seconds = remainingTime % 60;
 
+    hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
     if (display) {
-      display.textContent = minutes + ":" + seconds;
+      display.textContent = `${days}d ${hours}:${minutes}:${seconds}`;
     }
   }
 
