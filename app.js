@@ -1,18 +1,21 @@
 // Reloj de cuenta regresiva persistente con localStorage
 function startTimer(display) {
-  const durationInSeconds = 15 * 60; // 15 minutos en segundos
+  const durationInSeconds = 15 * 60; // 15 minutos en segundos (900s)
   let endTime = localStorage.getItem('timerEndTime');
 
-  if (!endTime || Date.now() > parseInt(endTime, 10)) {
-    endTime = Date.now() + durationInSeconds * 1000;
+  const now = Date.now();
+
+  // Si no existe, si ya expiró, O si el valor guardado sobrepasa los 15 minutos (por restos de pruebas anteriores), lo reiniciamos
+  if (!endTime || now > parseInt(endTime, 10) || parseInt(endTime, 10) > now + (durationInSeconds * 1000)) {
+    endTime = now + durationInSeconds * 1000;
     localStorage.setItem('timerEndTime', endTime);
   } else {
     endTime = parseInt(endTime, 10);
   }
 
   function updateTimer() {
-    const now = Date.now();
-    let remainingTime = Math.floor((endTime - now) / 1000);
+    const currentTime = Date.now();
+    let remainingTime = Math.floor((endTime - currentTime) / 1000);
 
     if (remainingTime <= 0) {
       endTime = Date.now() + durationInSeconds * 1000;
@@ -38,7 +41,7 @@ function startTimer(display) {
 // Abrir Modal de Imagen Full con animación
 function openModal(imgSrc, title) {
   const modal = document.getElementById('imageModal');
-  modalImg = document.getElementById('imgFull');
+  const modalImg = document.getElementById('imgFull');
   const modalTitle = document.getElementById('modalTitle');
   
   modalImg.src = imgSrc;
