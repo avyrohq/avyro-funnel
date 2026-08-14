@@ -1,11 +1,9 @@
 // Reloj de cuenta regresiva persistente con localStorage
 function startTimer(display) {
-  const durationInSeconds = 15 * 60; // 15 minutos en segundos (900s)
+  const durationInSeconds = 15 * 60; // 15 minutos (900s)
   let endTime = localStorage.getItem('timerEndTime');
-
   const now = Date.now();
 
-  // Si no existe, si ya expiró, O si el valor guardado sobrepasa los 15 minutos (por restos de pruebas anteriores), lo reiniciamos
   if (!endTime || now > parseInt(endTime, 10) || parseInt(endTime, 10) > now + (durationInSeconds * 1000)) {
     endTime = now + durationInSeconds * 1000;
     localStorage.setItem('timerEndTime', endTime);
@@ -38,7 +36,7 @@ function startTimer(display) {
   setInterval(updateTimer, 1000);
 }
 
-// Abrir Modal de Imagen Full con animación
+// Abrir Modal de Imagen Full con animación suave
 function openModal(imgSrc, title) {
   const modal = document.getElementById('imageModal');
   const modalImg = document.getElementById('imgFull');
@@ -53,7 +51,7 @@ function openModal(imgSrc, title) {
   }, 10);
 }
 
-// Cerrar Modal con animación suave
+// Cerrar Modal
 function closeModal() {
   const modal = document.getElementById('imageModal');
   modal.classList.remove('show');
@@ -69,7 +67,7 @@ window.onload = function () {
     startTimer(display);
   }
 
-  // Evento para rastrear el clic al Checkout en Meta Pixel
+  // Rastrear InitiateCheckout en Meta Pixel para todos los enlaces a Hotmart
   const ctaButtons = document.querySelectorAll('a[href*="hotmart.com"]');
   ctaButtons.forEach(btn => {
     btn.addEventListener('click', function() {
@@ -79,7 +77,7 @@ window.onload = function () {
     });
   });
 
-  // Funcionalidad del Acordeón FAQ
+  // Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {

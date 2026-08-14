@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crea Landing Pages con IA - Avyro Digital</title>
+    <title>Crea Landing Pages de Alta Conversión con IA - Avyro Digital</title>
     
-    <!-- Favicon Universal para todos los navegadores -->
+    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.png">
     <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
 
-    <!-- Google Fonts & Lucide Icons -->
+    <!-- Fuentes & Lucide Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Meta Pixel Code -->
@@ -39,102 +39,157 @@
 </head>
 <body>
 
-    <!-- Bar de Urgencia Flotante -->
+    <!-- Barra de Urgencia Superior -->
     <div class="top-bar">
-        <span>⚡ <strong>OFERTA ESPECIAL DE LANZAMIENTO:</strong> 50% DE DESCUENTO DISPONIBLE. EXPIRA EN:</span>
-        <span id="countdown">15:00</span>
+        <div class="top-bar-inner">
+            <span class="live-pulse"></span>
+            <span>⚡ <strong>OFERTA DE LANZAMIENTO (50% OFF):</strong> Acceso completo + 3 Bonos Exclusivos. Expira en:</span>
+            <span id="countdown">15:00</span>
+        </div>
     </div>
 
-    <!-- Iluminación de fondo (Glow Effects) -->
+    <!-- Iluminación de Fondo (Glow Effects) -->
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="container">
             <div class="badge-pill">
-                <i data-lucide="sparkles"></i>
-                <span>Guía Práctica • Descarga Inmediata</span>
+                <i data-lucide="zap"></i>
+                <span>Método Probado • Sin Código • De Cero a Publicado en 30 min</span>
             </div>
             
-            <h1>Crea la <span class="highlight-gradient">Landing Page</span> de tu negocio en menos de 30 minutos con IA</h1>
+            <h1>Transforma un simple <span class="highlight-prompt">Prompt de IA</span> en una <span class="highlight-gradient">Landing Page Profesional</span></h1>
             
-            <p class="subtitle">Sin saber programar ni diseñar. Guía paso a paso para dueños de negocio, emprendedores y freelancers que quieren tener su página web hoy mismo y captar más clientes.</p>
+            <p class="subtitle">Deja de pagar miles de dólares a agencias o perder semanas aprendiendo a programar. Aprende el método exacto paso a paso para diseñar, redactar y publicar webs de alta conversión hoy mismo.</p>
 
-            <div class="features-pill-group">
-                <span class="pill-item"><i data-lucide="check-circle-2"></i> Sin saber programar</span>
-                <span class="pill-item"><i data-lucide="check-circle-2"></i> Usando Inteligencia Artificial</span>
-                <span class="pill-item"><i data-lucide="check-circle-2"></i> Guía Paso a Paso</span>
-                <span class="pill-item"><i data-lucide="check-circle-2"></i> Proyectos reales listos en minutos</span>
+            <!-- Comparativa Rápida de Autoridad -->
+            <div class="hero-comparison-bar">
+                <div class="comp-item negative"><i data-lucide="x"></i> Antes: 3 semanas + $800 USD en agencias</div>
+                <div class="comp-item positive"><i data-lucide="check"></i> Ahora: 30 minutos + $0 en herramientas</div>
             </div>
 
-            <!-- Botón CTA principal -->
+            <!-- Interactivo / Visual Hook (Linear/Stripe Style) -->
+            <div class="hero-preview-window">
+                <div class="window-header">
+                    <div class="window-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="window-title">prompt-generator.ai — CreaLandingPages.pdf</div>
+                    <div class="window-status"><i data-lucide="check-circle-2"></i> Listo para publicar</div>
+                </div>
+                <div class="window-body">
+                    <div class="prompt-box">
+                        <span class="prompt-tag">PROMPT INCLUIDO:</span>
+                        <code>"Actúa como un diseñador UX/UI de Silicon Valley. Crea el código completo para una landing page de alta conversión para [Tu Negocio], con modo oscuro, botones de WhatsApp y carga ultra rápida..."</code>
+                    </div>
+                    <div class="arrow-down-divider">
+                        <i data-lucide="arrow-down"></i> <span>La IA genera tu web completa en 60 segundos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón CTA Principal -->
             <div class="cta-wrapper">
-                <a href="https://pay.hotmart.com/G104959495L?ref=I106899188I" id="btn-checkout" class="cta-button">
-                    <span>¡QUIERO CREAR MI PÁGINA AHORA!</span>
+                <a href="https://pay.hotmart.com/G104959495L?ref=I106899188I" class="cta-button pulse-btn">
+                    <span>¡QUIERO ACCEDER A LA GUÍA Y LOS PROMPTS!</span>
                     <i data-lucide="arrow-right"></i>
                 </a>
-                <p class="price-notice">Solo <strong>$29.90 USD</strong> <span class="old-price">(Precio regular $59 USD)</span></p>
+                <div class="price-container">
+                    <span class="old-price">Precio Regular: $59.90 USD</span>
+                    <span class="deal-price">Hoy solo <strong>$29.90 USD</strong> <small>(Pago único)</small></span>
+                </div>
                 <div class="guarantee-micro">
                     <i data-lucide="shield-check"></i>
-                    <span>Pago 100% seguro por Hotmart • Acceso inmediato • Garantía de 7 días</span>
+                    <span>Descarga Inmediata • Acceso de por vida • Garantía 100% de 7 Días</span>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Barra de Prueba Social y Confianza -->
+    <div class="social-proof-strip">
+        <div class="container proof-grid">
+            <div class="proof-stat">
+                <strong>+350</strong>
+                <span>Páginas Creadas</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong>100%</strong>
+                <span>Sin Programación</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong>$0</strong>
+                <span>Gasto en Hosting</span>
+            </div>
+            <div class="proof-divider"></div>
+            <div class="proof-stat">
+                <strong>4.9 / 5 ⭐</strong>
+                <span>Satisfacción Alumnos</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Proyectos de Ejemplo con Muestras Reales -->
-    <section class="projects-showcase">
+    <section class="projects-showcase" id="ejemplos">
         <div class="container">
-            <h2 class="section-title">Resultados reales: Páginas que aprenderás a construir desde cero</h2>
-            <p class="section-subtitle">Haz clic en cualquier proyecto para ver la estructura completa de la landing page.</p>
+            <div class="section-tag">CASOS PRÁCTICOS</div>
+            <h2 class="section-title">Páginas reales que aprenderás a construir en minutos</h2>
+            <p class="section-subtitle">Plantillas y estructuras probadas que vienen desglosadas dentro del e-book. Haz clic para ver cada detalle:</p>
             
             <div class="projects-grid">
                 <!-- Proyecto 1 -->
-                <div class="project-card">
-                    <div class="project-img-wrapper" onclick="openModal('assets/dental-care-full.png', 'DC - Dental Care')">
+                <div class="project-card" onclick="openModal('assets/dental-care-full.png', 'DC - Dental Care')">
+                    <div class="project-img-wrapper">
                         <img src="assets/dental-care.png" alt="DC Dental Care Landing Page" class="project-preview">
                         <div class="overlay">
                             <i data-lucide="zoom-in"></i>
-                            <span>Ver página completa</span>
+                            <span>Ver landing completa</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <div class="project-badge">Salud & Consultorios</div>
+                        <div class="project-badge pink">Salud & Clínicas</div>
                         <h3>DC - Dental Care</h3>
-                        <p>Estructura optimizada con hero de alta conversión, servicios destacados, instalaciones y agendamiento directo por WhatsApp.</p>
+                        <p>Diseño premium con llamada a la acción hacia WhatsApp y sección de agendamiento instantáneo.</p>
+                        <div class="project-time"><i data-lucide="clock"></i> Tiempo de creación: 18 minutos</div>
                     </div>
                 </div>
 
                 <!-- Proyecto 2 -->
-                <div class="project-card">
-                    <div class="project-img-wrapper" onclick="openModal('assets/flame-grill-full.png', 'FG - Flame & Grill')">
+                <div class="project-card" onclick="openModal('assets/flame-grill-full.png', 'FG - Flame & Grill')">
+                    <div class="project-img-wrapper">
                         <img src="assets/flame-grill.png" alt="FG Flame & Grill Landing Page" class="project-preview">
                         <div class="overlay">
                             <i data-lucide="zoom-in"></i>
-                            <span>Ver página completa</span>
+                            <span>Ver landing completa</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <div class="project-badge">Restaurantes & Gastronomía</div>
+                        <div class="project-badge purple">Restaurantes & Bares</div>
                         <h3>FG - Flame & Grill</h3>
-                        <p>Diseño gastronómico moderno con menú destacado, sección de experiencia y reserva directa de mesa.</p>
+                        <p>Menú visual moderno, integración de reservas y mapa de ubicación interactivo.</p>
+                        <div class="project-time"><i data-lucide="clock"></i> Tiempo de creación: 22 minutos</div>
                     </div>
                 </div>
 
                 <!-- Proyecto 3 -->
-                <div class="project-card">
-                    <div class="project-img-wrapper" onclick="openModal('assets/glamour-studio-full.png', 'GS - Glamour Studio')">
+                <div class="project-card" onclick="openModal('assets/glamour-studio-full.png', 'GS - Glamour Studio')">
+                    <div class="project-img-wrapper">
                         <img src="assets/glamour-studio.png" alt="GS Glamour Studio Landing Page" class="project-preview">
                         <div class="overlay">
                             <i data-lucide="zoom-in"></i>
-                            <span>Ver página completa</span>
+                            <span>Ver landing completa</span>
                         </div>
                     </div>
                     <div class="project-info">
-                        <div class="project-badge">Belleza & Estética</div>
+                        <div class="project-badge blue">Estética & Spa</div>
                         <h3>GS - Glamour Studio</h3>
-                        <p>Diseño elegante enfocado en servicios de estética, catálogo visual de trabajos y reservas inmediatas.</p>
+                        <p>Catálogo visual de alta conversión optimizado para compras directas y promociones.</p>
+                        <div class="project-time"><i data-lucide="clock"></i> Tiempo de creación: 15 minutos</div>
                     </div>
                 </div>
             </div>
@@ -150,58 +205,105 @@
         </div>
     </div>
 
-    <!-- Lo que vas a lograr -->
-    <section class="benefits" id="benefits">
+    <!-- Lo que vas a dominar (Features Grid) -->
+    <section class="benefits">
         <div class="container">
-            <h2 class="section-title">¿Qué vas a lograr con esta guía práctica?</h2>
+            <div class="section-tag">EL MÉTODO</div>
+            <h2 class="section-title">Todo lo que lograrás dominar paso a paso</h2>
             
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <div class="icon-box pink">
-                        <i data-lucide="layout"></i>
+                        <i data-lucide="code-2"></i>
                     </div>
-                    <h3>Crear tu landing profesional</h3>
-                    <p>Genera la estructura de tu web para comunicar el valor de tu negocio y convertir visitantes en clientes reales.</p>
+                    <h3>0% Código, 100% IA</h3>
+                    <p>La IA escribe la estructura semántica y el diseño. Tú solo diriges la orquesta con instrucciones en español simple.</p>
                 </div>
 
                 <div class="benefit-card">
                     <div class="icon-box purple">
-                        <i data-lucide="bot"></i>
+                        <i data-lucide="terminal"></i>
                     </div>
-                    <h3>Usar IA para generar tu página</h3>
-                    <p>Aprende a usar prompts de IA sencillos para armar textos, secciones y el diseño en minutos sin complicaciones.</p>
+                    <h3>Copiar, Pegar y Personalizar</h3>
+                    <p>Accede a nuestra biblioteca privada de prompts optimizados para generar textos persuasivos que vendan.</p>
                 </div>
 
                 <div class="benefit-card">
                     <div class="icon-box green">
-                        <i data-lucide="globe"></i>
+                        <i data-lucide="server-off"></i>
                     </div>
-                    <h3>Publicar en internet fácilmente</h3>
-                    <p>Te guiamos paso a paso a publicar tu web en plataformas gratuitas para obtener tu URL lista para compartir.</p>
+                    <h3>Publicación Gratis y de por Vida</h3>
+                    <p>Aprende a alojar tu sitio en plataformas cloud profesionales sin pagar mensualidades de hosting ni servidores.</p>
                 </div>
 
                 <div class="benefit-card">
                     <div class="icon-box blue">
-                        <i data-lucide="message-square"></i>
+                        <i data-lucide="phone-call"></i>
                     </div>
-                    <h3>Integrar WhatsApp y Formularios</h3>
-                    <p>Conecta botones directos de contacto para que tus potenciales clientes te escriban de inmediato.</p>
+                    <h3>Embudos Hacia WhatsApp</h3>
+                    <p>Conecta botones directos con mensajes predeterminados para cerrar clientes desde el primer día.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Lo que incluye la guía -->
-    <section class="content-included">
+    <!-- SECCIÓN DE BONOS EXCLUSIVOS (AUMENTO DE VALOR) -->
+    <section class="bonuses-section">
         <div class="container">
-            <h2 class="section-title">Todo lo que encontrarás dentro de la guía</h2>
-            <div class="content-list">
-                <div class="content-item"><i data-lucide="check"></i> <span>Qué es una landing page y por qué tu negocio la necesita.</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>Herramientas de IA gratuitas para crear páginas web.</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>Prompts listos para copiar y pegar en la IA.</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>3 ejemplos reales paso a paso (Restaurante, Clínica y Spa).</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>Cómo publicar tu landing page en internet sin pagar hosting.</span></div>
-                <div class="content-item"><i data-lucide="check"></i> <span>Estrategias directas para atraer clientes con tu nueva web.</span></div>
+            <div class="section-tag bonus-tag">REGALOS INCLUIDOS HOY</div>
+            <h2 class="section-title">Llévate GRATIS estos 3 Bonos de Aceleración</h2>
+            <p class="section-subtitle">Si adquieres la guía durante esta ventana de oferta, recibirás acceso a todo este material complementario:</p>
+
+            <div class="bonuses-grid">
+                <div class="bonus-card">
+                    <div class="bonus-pill">Bono #1 • Valor: $27 USD</div>
+                    <div class="bonus-icon"><i data-lucide="book-copy"></i></div>
+                    <h3>Cheat Sheet: 50 Prompts Maestros para IA</h3>
+                    <p>Plantillas listas para copiar y pegar para redactar títulos magnéticos, llamados a la acción y secciones de objeciones.</p>
+                    <span class="free-badge">GRATIS HOY</span>
+                </div>
+
+                <div class="bonus-card featured-bonus">
+                    <div class="bonus-pill">Bono #2 • Valor: $35 USD</div>
+                    <div class="bonus-icon"><i data-lucide="activity"></i></div>
+                    <h3>Checklist de Auditoría de Carga Rápida</h3>
+                    <p>La guía rápida para que tu página web cargue en menos de 1.5 segundos en cualquier celular y no pierdas tráfico.</p>
+                    <span class="free-badge">GRATIS HOY</span>
+                </div>
+
+                <div class="bonus-card">
+                    <div class="bonus-pill">Bono #3 • Valor: $25 USD</div>
+                    <div class="bonus-icon"><i data-lucide="share-2"></i></div>
+                    <h3>Plantilla de Dominio Personalizado</h3>
+                    <p>Tutorial exacto para conectar tu propio dominio profesional (.com o .cl) sin pagar servicios técnicos extra.</p>
+                    <span class="free-badge">GRATIS HOY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Módulo de Oferta Resumida (Stack de Valor) -->
+    <section class="value-stack-section">
+        <div class="container">
+            <div class="value-box">
+                <h2>Todo lo que te llevas hoy al instante:</h2>
+                <ul class="value-list">
+                    <li><i data-lucide="check-circle-2"></i> <span><strong>E-book Completo:</strong> Crea Landing Pages con IA sin saber programar <em>(Valor $59 USD)</em></span></li>
+                    <li><i data-lucide="check-circle-2"></i> <span><strong>3 Plantillas de Proyectos Reales</strong> listos para duplicar <em>(Valor $37 USD)</em></span></li>
+                    <li><i data-lucide="check-circle-2"></i> <span><strong>Bono #1:</strong> 50 Prompts Maestros de Conversión <em>(Valor $27 USD)</em></span></li>
+                    <li><i data-lucide="check-circle-2"></i> <span><strong>Bono #2:</strong> Checklist de Auditoría de Velocidad <em>(Valor $35 USD)</em></span></li>
+                    <li><i data-lucide="check-circle-2"></i> <span><strong>Bono #3:</strong> Guía de Conexión de Dominio Gratis <em>(Valor $25 USD)</em></span></li>
+                    <li><i data-lucide="check-circle-2"></i> <span>Actualizaciones de por vida + Acceso instantáneo</span></li>
+                </ul>
+
+                <div class="total-val">Valor Total Acumulado: <span class="strikethrough">$183 USD</span></div>
+                <div class="final-offer-price">Obtén todo hoy por solo: <strong>$29.90 USD</strong></div>
+
+                <a href="https://pay.hotmart.com/G104959495L?ref=I106899188I" class="cta-button pulse-btn">
+                    <span>¡QUIERO TODO EL PACK CON 50% OFF!</span>
+                    <i data-lucide="arrow-right"></i>
+                </a>
+                <p class="secure-tag"><i data-lucide="lock"></i> Checkout seguro procesado con encriptación SSL por Hotmart</p>
             </div>
         </div>
     </section>
@@ -209,36 +311,47 @@
     <!-- Preguntas Frecuentes (FAQ) -->
     <section class="faq">
         <div class="container">
+            <div class="section-tag">DUDAS COMUNES</div>
             <h2 class="section-title">Preguntas Frecuentes</h2>
             
             <div class="accordion">
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>¿Cuánto tiempo toma crear la landing page?</span>
+                        <span>¿De verdad no necesito conocimientos previos de programación?</span>
                         <i data-lucide="chevron-down"></i>
                     </button>
                     <div class="accordion-content">
-                        <p>Siguiendo la guía, tendrás tu landing page completa y lista para publicar en menos de 30 minutos.</p>
+                        <p>Totalmente. El método está diseñado desde cero para personas que nunca han escrito una línea de código. La Inteligencia Artificial redacta y estructura el código; tú solo aprendes a ordenarlo y publicarlo con unos pocos clics.</p>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>¿Necesito saber programar o diseñar páginas web?</span>
+                        <span>¿Tendré que gastar dinero extra en software o mensualidades?</span>
                         <i data-lucide="chevron-down"></i>
                     </button>
                     <div class="accordion-content">
-                        <p>No. La guía está pensada para personas sin conocimientos técnicos. La Inteligencia Artificial se encarga de la parte compleja.</p>
+                        <p>No. En la guía te enseñamos a utilizar las versiones 100% gratuitas de las principales herramientas de IA y servidores de hosting gratuito para que tu costo de mantenimiento sea de $0 USD al mes.</p>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>¿Tengo que pagar por las herramientas de IA?</span>
+                        <span>¿Cómo y cuándo recibo el material?</span>
                         <i data-lucide="chevron-down"></i>
                     </button>
                     <div class="accordion-content">
-                        <p>No. En la guía te mostramos cómo utilizar herramientas con versiones gratuitas totalmente suficientes para publicar tu sitio.</p>
+                        <p>Inmediatamente tras completar tu pago en Hotmart, recibirás un correo electrónico con tus accesos directos para descargar la guía en PDF y todos los bonos en cualquier dispositivo (celular, tablet o computador).</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>¿Qué pasa si el método no me funciona?</span>
+                        <i data-lucide="chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Cuentas con nuestra garantía incondicional de 7 días. Si pruebas el material y sientes que no fue útil para ti, solicitas el reembolso directo en Hotmart y se te reintegra el 100% de tu dinero sin trámites ni preguntas.</p>
                     </div>
                 </div>
             </div>
@@ -250,28 +363,37 @@
         <div class="container">
             <div class="guarantee-card">
                 <div class="guarantee-icon">
-                    <i data-lucide="award"></i>
+                    <i data-lucide="shield-check"></i>
                 </div>
                 <div>
-                    <h2>Garantía Incondicional de 7 Días</h2>
-                    <p>Obtén la guía y ponla a prueba. Si sientes que no te ayuda a crear tu landing page, solicitas tu reembolso inmediato en Hotmart y se te devuelve el 100% de tu dinero sin preguntas.</p>
+                    <h2>Garantía Incondicional de 7 Días (Cero Riesgo)</h2>
+                    <p>Accede al e-book, aplica los prompts y construye tu primera web. Si por cualquier motivo sientes que la guía no cumplió tus expectativas, tienes 7 días para pedir la devolución íntegra de tu dinero directamente desde tu panel de Hotmart.</p>
                 </div>
             </div>
 
             <!-- CTA Final -->
             <div class="cta-wrapper final-cta">
                 <a href="https://pay.hotmart.com/G104959495L?ref=I106899188I" class="cta-button">
-                    <span>¡QUIERO CREAR MI LANDING PAGE AHORA!</span>
+                    <span>¡EMPEZAR A CREAR MI LANDING AHORA!</span>
                     <i data-lucide="arrow-right"></i>
                 </a>
-                <p class="price-notice">Precio especial por tiempo limitado: <strong>$29.90 USD</strong></p>
+                <p class="price-notice">Oferta especial de lanzamiento: <strong>$29.90 USD</strong></p>
             </div>
         </div>
     </section>
 
+    <!-- Floating Sticky Button Mobile -->
+    <div class="mobile-sticky-cta">
+        <a href="https://pay.hotmart.com/G104959495L?ref=I106899188I" class="sticky-btn">
+            <span>Obtener Guía + Bonos ($29.90 USD)</span>
+            <i data-lucide="arrow-right"></i>
+        </a>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Avyro Digital. Todos los derechos reservados.</p>
+            <p class="legal-notice">Este sitio no es parte ni está respaldado por Meta™, Facebook™ o Instagram™.</p>
         </div>
     </footer>
 
