@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = header.parentElement;
       const isOpen = item.classList.contains('active');
 
-      // Opcional: Cerrar otros elementos abiertos para vista más limpia en mobile
+      // Cerrar otros elementos abiertos para una navegación limpia en mobile
       document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
 
       if (!isOpen) {

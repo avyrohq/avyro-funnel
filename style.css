@@ -2,21 +2,21 @@
   --font-main: 'Plus Jakarta Sans', sans-serif;
   --font-code: 'JetBrains Mono', monospace;
   
-  --bg-dark: #07040d;
-  --card-bg: rgba(19, 11, 33, 0.75);
+  --bg-dark: #09090b;
+  --card-bg: rgba(24, 24, 27, 0.75);
   --card-border: rgba(255, 255, 255, 0.08);
-  --card-border-hover: rgba(168, 85, 247, 0.35);
+  --card-border-hover: rgba(245, 158, 11, 0.35);
   
-  --primary: #a855f7;
-  --primary-glow: rgba(168, 85, 247, 0.35);
-  --accent-pink: #ec4899;
-  --accent-purple: #a855f7;
-  --accent-blue: #38bdf8;
-  --accent-green: #10b981;
+  --primary: #f59e0b;
+  --primary-glow: rgba(245, 158, 11, 0.35);
   --accent-amber: #f59e0b;
+  --accent-orange: #ea580c;
+  --accent-green: #10b981;
+  --accent-blue: #38bdf8;
+  --accent-purple: #a855f7;
   
-  --text-white: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-white: #fafafa;
+  --text-muted: #a1a1aa;
 }
 
 * {
@@ -32,7 +32,7 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
-  padding-bottom: 70px; /* Espacio para el floating bar mobile */
+  padding-bottom: 70px;
 }
 
 .container {
@@ -50,7 +50,7 @@ body {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  filter: blur(150px);
+  filter: blur(160px);
   pointer-events: none;
   z-index: 1;
 }
@@ -59,19 +59,19 @@ body {
   top: -120px;
   left: 50%;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, rgba(0,0,0,0) 70%);
 }
 
 .glow-2 {
   top: 700px;
   right: -150px;
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.18) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.16) 0%, rgba(0,0,0,0) 70%);
 }
 
 .glow-3 {
   top: 1800px;
   left: -150px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(0,0,0,0) 70%);
 }
 
 /* Hero Section */
@@ -107,7 +107,7 @@ h1 {
 }
 
 .highlight-gradient {
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #38bdf8 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #10b981 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -152,12 +152,12 @@ h1 {
 
 .comp-item svg { width: 14px; height: 14px; }
 
-/* Interactive Window Preview (Linear Style) */
+/* Interactive Window Preview */
 .hero-preview-window {
-  background: rgba(13, 8, 22, 0.9);
+  background: rgba(18, 18, 22, 0.95);
   border: 1px solid var(--card-border);
   border-radius: 14px;
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto 35px auto;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -202,20 +202,20 @@ h1 {
 }
 
 .prompt-box {
-  background: rgba(0, 0, 0, 0.4);
-  border-left: 3px solid var(--accent-blue);
+  background: rgba(0, 0, 0, 0.5);
+  border-left: 3px solid var(--primary);
   padding: 12px 14px;
   border-radius: 6px;
   font-family: var(--font-code);
   font-size: 0.84rem;
   line-height: 1.5;
-  color: #cbd5e1;
+  color: #e4e4e7;
 }
 
 .prompt-tag {
   display: block;
   font-size: 0.7rem;
-  color: var(--accent-blue);
+  color: var(--primary);
   font-weight: 700;
   margin-bottom: 4px;
 }
@@ -245,11 +245,11 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
   color: white;
   padding: 18px 36px;
   border-radius: 50px;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 10px 30px var(--primary-glow);
@@ -259,7 +259,7 @@ h1 {
 
 .cta-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 40px rgba(168, 85, 247, 0.55);
+  box-shadow: 0 14px 40px rgba(245, 158, 11, 0.55);
 }
 
 .cta-button.pulse-btn {
@@ -268,7 +268,7 @@ h1 {
 
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 10px 30px var(--primary-glow); }
-  50% { box-shadow: 0 12px 45px rgba(168, 85, 247, 0.65); }
+  50% { box-shadow: 0 12px 45px rgba(245, 158, 11, 0.65); }
 }
 
 .price-container {
@@ -349,7 +349,7 @@ h1 {
   background: var(--card-border);
 }
 
-/* Section Common Headers */
+/* Common Section Headers */
 .section-tag {
   display: inline-block;
   font-size: 0.75rem;
@@ -408,16 +408,16 @@ h1 {
   margin-bottom: 16px;
 }
 
-.icon-box.pink { background: rgba(236, 72, 153, 0.12); color: var(--accent-pink); }
-.icon-box.purple { background: rgba(168, 85, 247, 0.12); color: var(--accent-purple); }
-.icon-box.blue { background: rgba(56, 189, 248, 0.12); color: var(--accent-blue); }
+.icon-box.amber { background: rgba(245, 158, 11, 0.12); color: var(--accent-amber); }
 .icon-box.green { background: rgba(16, 185, 129, 0.12); color: var(--accent-green); }
+.icon-box.blue { background: rgba(56, 189, 248, 0.12); color: var(--accent-blue); }
+.icon-box.purple { background: rgba(168, 85, 247, 0.12); color: var(--accent-purple); }
 .icon-box.red-icon { background: rgba(239, 68, 68, 0.12); color: #f87171; }
 
 .benefit-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
 .benefit-card p { color: var(--text-muted); font-size: 0.88rem; }
 
-/* Bonuses / Resources Section */
+/* Bonuses Section */
 .bonuses-section {
   padding: 50px 0;
 }
@@ -445,7 +445,7 @@ h1 {
 
 .bonus-card.featured-bonus {
   border-color: rgba(245, 158, 11, 0.35);
-  background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, rgba(19, 11, 33, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, rgba(24, 24, 27, 0.8) 100%);
 }
 
 .bonus-pill {
@@ -559,8 +559,8 @@ h1 {
 }
 
 .value-box {
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.08) 0%, rgba(19, 11, 33, 0.95) 100%);
-  border: 1px solid rgba(168, 85, 247, 0.35);
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.08) 0%, rgba(24, 24, 27, 0.95) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.35);
   border-radius: 20px;
   padding: 35px 25px;
   max-width: 720px;
@@ -605,6 +605,12 @@ h1 {
 .final-offer-price strong {
   color: #34d399;
   font-size: 1.8rem;
+}
+
+.final-offer-price small {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
 }
 
 .secure-tag {
@@ -718,7 +724,7 @@ h1 {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(10, 6, 18, 0.95);
+  background: rgba(9, 9, 11, 0.95);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--card-border);
   padding: 10px 15px;
@@ -731,7 +737,7 @@ h1 {
   justify-content: center;
   gap: 8px;
   width: 100%;
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
   color: white;
   padding: 14px 16px;
   border-radius: 30px;
