@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Rastrear InitiateCheckout en Meta Pixel para todos los enlaces a Hotmart
+  // Rastrear InitiateCheckout en Meta Pixel para los clicks al checkout de Hotmart
   const ctaButtons = document.querySelectorAll('a[href*="hotmart.com"]');
   ctaButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = header.parentElement;
       const isOpen = item.classList.contains('active');
 
-      // Cerrar otros elementos abiertos para una navegación limpia en mobile
+      // Cerrar otros elementos abiertos para lectura cómoda en celular
       document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
 
       if (!isOpen) {
