@@ -36,7 +36,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  padding-bottom: 0; /* Sin espacio muerto inferior */
+  padding-bottom: 0;
 }
 
 .container {
@@ -734,6 +734,39 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+/* Grupo de Teléfono con Prefijo Integrado */
+.phone-input-group {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.phone-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: #f1f5f9;
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0 14px;
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  user-select: none;
+}
+
+.phone-input-group input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  flex: 1;
+}
+
+.phone-input-group:focus-within .phone-prefix {
+  border-color: var(--primary-blue);
+}
+
 .btn-submit {
   display: flex;
   align-items: center;
@@ -838,7 +871,7 @@ input:focus, select:focus {
   max-height: 200px;
 }
 
-/* Footer con logo destacado y limpio */
+/* Footer */
 .site-footer {
   background-color: var(--bg-avyro-dark);
   color: #f8fafc;

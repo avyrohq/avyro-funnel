@@ -229,7 +229,7 @@
         </div>
     </section>
 
-    <!-- Reseñas Dinámicas Ampliadas -->
+    <!-- Reseñas Dinámicas -->
     <section class="reviews-section">
         <div class="container">
             <div class="badge-center">OPINIONES VERIFICADAS</div>
@@ -344,7 +344,7 @@
                     <div class="summary-box">
                         <div class="summary-row">
                             <span>Producto:</span>
-                            <strong id="summaryProductName">Kit Taladro 48V (2 Baterías + Maletín)</strong>
+                            <strong id="summaryProductName">Taladro inalámbrico 48v</strong>
                         </div>
                         <div class="summary-row">
                             <span>Despacho:</span>
@@ -362,9 +362,13 @@
                             <input type="text" id="nombre" name="nombre" required placeholder="Ej: Roberto Muñoz">
                         </div>
 
+                        <!-- Input de Teléfono con Prefijo Fijo +56 -->
                         <div class="form-group">
                             <label for="telefono">Teléfono / WhatsApp *</label>
-                            <input type="tel" id="telefono" name="telefono" required placeholder="+56 9 1234 5678" maxlength="15">
+                            <div class="phone-input-group">
+                                <span class="phone-prefix">🇨🇱 +56</span>
+                                <input type="tel" id="telefono" name="telefono" required placeholder="9 1234 5678" maxlength="11">
+                            </div>
                         </div>
 
                         <!-- Selector hasta 4 Kits -->
@@ -389,6 +393,7 @@
                                 <input type="text" id="comuna" name="comuna" required placeholder="Ej: Maipú / Concepción">
                             </div>
 
+                            <!-- Menú Desplegable de Regiones de Chile -->
                             <div class="form-group">
                                 <label for="region">Región *</label>
                                 <select id="region" name="region" required>
