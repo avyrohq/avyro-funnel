@@ -36,7 +36,7 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  padding-bottom: 75px;
+  padding-bottom: 0; /* Sin espacio muerto inferior */
 }
 
 .container {
@@ -81,7 +81,6 @@ body {
   text-decoration: none;
 }
 
-/* Logo con escala destacada */
 .brand-logo-img {
   height: 75px;
   width: auto;
@@ -839,40 +838,11 @@ input:focus, select:focus {
   max-height: 200px;
 }
 
-/* Mobile Sticky CTA */
-.mobile-sticky-cta {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #ffffff;
-  border-top: 1px solid var(--border-color);
-  padding: 10px 15px;
-  z-index: 999;
-  box-shadow: 0 -4px 15px rgba(0,0,0,0.08);
-}
-
-.sticky-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  background-color: var(--accent-green);
-  color: #ffffff;
-  padding: 14px 16px;
-  border-radius: 8px;
-  font-size: 0.92rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-/* Footer con logo destacado */
+/* Footer con logo destacado y limpio */
 .site-footer {
   background-color: var(--bg-avyro-dark);
   color: #f8fafc;
-  padding: 50px 0 20px 0;
+  padding: 50px 0 25px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -880,7 +850,7 @@ input:focus, select:focus {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 
 .footer-logo {
@@ -959,12 +929,6 @@ input:focus, select:focus {
   color: #64748b;
 }
 
-.footer-disclaimer {
-  font-size: 0.7rem;
-  margin-top: 6px;
-  opacity: 0.8;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .header-badge {
@@ -1009,10 +973,6 @@ input:focus, select:focus {
 
   .review-slide {
     padding: 20px 15px;
-  }
-
-  .mobile-sticky-cta {
-    display: block;
   }
   
   h1 {

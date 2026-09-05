@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp con código de país (+56 9...)
   const WHATSAPP_NUMERO = '569XXXXXXXX'; 
 
-  // Escala de precios por volumen con descuentos
+  // Escala de precios por volumen con descuentos personalizados
   const PRECIOS_MAP = {
     1: 34990,
     2: 64990,
-    3: 94990
+    3: 89990,
+    4: 109990
   };
 
   // 1. Acordeón FAQ[cite: 2]
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Actualización dinámica del total según la oferta seleccionada
+  // 3. Actualización dinámica del total según la oferta seleccionada (1 a 4 kits)
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
