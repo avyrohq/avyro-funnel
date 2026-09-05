@@ -59,11 +59,11 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Header con fondo fundido del logo */
+/* Header */
 .site-header {
   background-color: var(--bg-avyro-dark);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 8px 0;
+  padding: 6px 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -81,16 +81,16 @@ body {
   text-decoration: none;
 }
 
-/* Logo más grande y sin cortes */
+/* Logo con escala destacada */
 .brand-logo-img {
-  height: 60px;
+  height: 75px;
   width: auto;
   display: block;
   object-fit: contain;
 }
 
 .footer-logo-img {
-  height: 64px;
+  height: 80px;
 }
 
 .header-right {
@@ -868,7 +868,7 @@ input:focus, select:focus {
   text-decoration: none;
 }
 
-/* Footer con fondo fundido del logo */
+/* Footer con logo destacado */
 .site-footer {
   background-color: var(--bg-avyro-dark);
   color: #f8fafc;
@@ -972,11 +972,11 @@ input:focus, select:focus {
   }
   
   .brand-logo-img {
-    height: 48px;
+    height: 58px;
   }
 
   .footer-logo-img {
-    height: 52px;
+    height: 62px;
   }
 
   .hero-grid {

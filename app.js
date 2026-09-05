@@ -5,7 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp con código de país (+56 9...)
   const WHATSAPP_NUMERO = '569XXXXXXXX'; 
 
-  const PRECIO_UNITARIO = 34990;
+  // Escala de precios por volumen con descuentos
+  const PRECIOS_MAP = {
+    1: 34990,
+    2: 64990,
+    3: 94990
+  };
 
   // 1. Acordeón FAQ[cite: 2]
   const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -65,12 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Actualización dinámica del total según cantidad seleccionada (1 a 5)
+  // 3. Actualización dinámica del total según la oferta seleccionada
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
-  function calcularTotal(qty) {
-    return qty * PRECIO_UNITARIO;
+  function obtenerTotal(qty) {
+    return PRECIOS_MAP[qty] || (qty * 34990);
   }
 
   function formatoMoneda(valor) {
@@ -80,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cantidadSelect && summaryTotalAmount) {
     cantidadSelect.addEventListener('change', (e) => {
       const qty = parseInt(e.target.value, 10) || 1;
-      const total = calcularTotal(qty);
+      const total = obtenerTotal(qty);
       summaryTotalAmount.textContent = formatoMoneda(total);
     });
   }
@@ -97,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.innerHTML = '<span>Agendando despacho...</span>';
 
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
-      const totalPagar = calcularTotal(qty);
+      const totalPagar = obtenerTotal(qty);
 
       const formData = {
         nombre: document.getElementById('nombre').value.trim(),
@@ -139,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +
         `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
-        `💰 *Total a pagar al recibir:* ${formatoMoneda(formData.total)}\n` +
+        `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
         `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
