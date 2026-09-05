@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Reemplaza por la URL de tu Google Apps Script (/exec) cuando despliegues el backend
+  // URL de tu Google Apps Script (/exec)
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec'; 
   
-  // Tu número de WhatsApp con código de país (+56 9...)
+  // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846'; 
 
   // Escala de precios por volumen con descuentos personalizados
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     4: 109990
   };
 
-  // 1. Acordeón FAQ[cite: 2]
+  // 1. Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -71,7 +71,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Actualización dinámica del total según la oferta seleccionada (1 a 4 kits)
+  // 3. Autoformateador de Teléfono Chileno (+56 9 1234 5678)
+  const telefonoInput = document.getElementById('telefono');
+  if (telefonoInput) {
+    telefonoInput.addEventListener('input', (e) => {
+      let raw = e.target.value.replace(/\D/g, ''); // Deja solo dígitos
+
+      // Quita el prefijo 569, 56 o 9 si el cliente lo ingresa manualmente para no duplicarlo
+      if (raw.startsWith('569')) {
+        raw = raw.substring(3);
+      } else if (raw.startsWith('56')) {
+        raw = raw.substring(2);
+      } else if (raw.startsWith('9')) {
+        raw = raw.substring(1);
+      }
+
+      // Limita a los 8 dígitos móviles
+      raw = raw.substring(0, 8);
+
+      // Aplica la máscara visual
+      if (raw.length === 0) {
+        e.target.value = '';
+      } else if (raw.length <= 4) {
+        e.target.value = `+56 9 ${raw}`;
+      } else {
+        e.target.value = `+56 9 ${raw.substring(0, 4)} ${raw.substring(4)}`;
+      }
+    });
+  }
+
+  // 4. Actualización dinámica del total según la oferta seleccionada (1 a 4 kits)
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
@@ -91,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Manejo del Formulario COD
+  // 5. Manejo del Formulario COD
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -104,16 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
       const totalPagar = obtenerTotal(qty);
+      const telefonoFormateado = document.getElementById('telefono').value.trim();
 
       const formData = {
         nombre: document.getElementById('nombre').value.trim(),
-        telefono: document.getElementById('telefono').value.trim(),
+        telefono: telefonoFormateado,
         cantidad: qty,
         total: totalPagar,
         direccion: document.getElementById('direccion').value.trim(),
         comuna: document.getElementById('comuna').value.trim(),
-        region: document.getElementById('region').value.trim(),
-        producto: 'Taladro Avyro 48V 25Nm (2 Baterías + Maletín)',
+        region: document.getElementById('region').value,
+        producto: 'Taladro inalámbrico 48v',
         fecha: new Date().toLocaleString('es-CL')
       };
 
@@ -147,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
+        `📞 *Teléfono:* ${formData.telefono}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
         `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
       );
