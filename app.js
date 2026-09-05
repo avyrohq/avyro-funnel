@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // CONFIGURACIÓN:
-  // Reemplaza por la URL de tu Google Apps Script (/exec) cuando lo tengas listo
+  // Reemplaza por la URL de tu Google Apps Script (/exec) cuando despliegues el backend
   const APPS_SCRIPT_URL = 'PEGA_AQUI_TU_APPS_SCRIPT_URL'; 
   
-  // Tu número de WhatsApp con código de país para la confirmación inmediata
+  // Tu número de WhatsApp con código de país (+56 9...)
   const WHATSAPP_NUMERO = '569XXXXXXXX'; 
 
-  // 1. Acordeón FAQ
+  // Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Manejo y envío del formulario COD
+  // Manejo del Formulario COD
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     orderForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Feedback visual
       submitBtn.classList.add('loading');
       submitBtn.innerHTML = '<span>Agendando despacho...</span>';
 
@@ -40,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
         direccion: document.getElementById('direccion').value.trim(),
         comuna: document.getElementById('comuna').value.trim(),
         region: document.getElementById('region').value.trim(),
-        producto: 'Taladro 48V (2 Baterías + Maletín)',
+        producto: 'Taladro 48V 25Nm (2 Baterías + Maletín)',
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparar evento de Meta Pixel (Lead / Purchase)
+      // Disparar evento de Meta Pixel
       if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
           content_name: formData.producto,
@@ -53,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      // Envío asíncrono a Google Sheets (Apps Script)
+      // Envío asíncrono a Google Sheets
       try {
         if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
           await fetch(APPS_SCRIPT_URL, {
@@ -64,17 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       } catch (err) {
-        console.warn('Registro local completado:', err);
+        console.warn('Registro completado:', err);
       }
 
-      // Redirección inmediata a WhatsApp para confirmación directa del cliente
+      // Mensaje de WhatsApp actualizado con opciones de pago al recibir
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +
         `📦 *Cantidad:* ${formData.cantidad} unidad(es)\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
-        `Confirmo que pagaré en efectivo/transferencia al repartidor al recibir.`
+        `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
       );
 
       window.location.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;
