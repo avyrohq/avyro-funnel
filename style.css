@@ -1,15 +1,15 @@
 :root {
   --font-main: 'Plus Jakarta Sans', sans-serif;
 
-  /* Paleta moderna industrial */
+  /* Paleta Avyro: Fondo slate limpio, acento azul degradado y verde de conversión */
   --bg-page: #f8fafc;
   --bg-surface: #ffffff;
-  --bg-alt: #f1f5f9;
-  --border-color: #cbd5e1;
+  --border-color: #e2e8f0;
   
-  --primary-navy: #0f172a;
-  --primary-blue: #1d4ed8;
-  --primary-blue-hover: #1e40af;
+  --primary-navy: #090d16;
+  --primary-blue: #2563eb;
+  --primary-blue-hover: #1d4ed8;
+  --accent-purple: #7c3aed;
   --accent-green: #16a34a;
   --accent-green-hover: #15803d;
   --accent-orange: #ea580c;
@@ -48,7 +48,7 @@ body {
 
 /* Top Announcement */
 .top-announcement {
-  background-color: var(--primary-navy);
+  background: linear-gradient(90deg, #090d16 0%, #1e1b4b 100%);
   color: #f8fafc;
   font-size: 0.8rem;
   font-weight: 800;
@@ -61,7 +61,7 @@ body {
 .site-header {
   background: #ffffff;
   border-bottom: 1px solid var(--border-color);
-  padding: 14px 0;
+  padding: 12px 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -76,31 +76,39 @@ body {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
   color: var(--primary-navy);
 }
 
-.logo-icon {
-  width: 22px;
-  height: 22px;
-  color: var(--primary-blue);
+.brand-logo-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 30px;
 }
 
 .logo-text {
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .logo-text strong {
   color: var(--primary-blue);
 }
 
+.text-white {
+  color: #ffffff;
+}
+
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 14px;
 }
 
 .header-badge {
@@ -128,7 +136,7 @@ body {
   font-size: 0.85rem;
   font-weight: 800;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: background 0.2s;
 }
 
@@ -152,7 +160,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #dbeafe;
+  background-color: #eff6ff;
   border: 1px solid #bfdbfe;
   padding: 6px 14px;
   border-radius: 30px;
@@ -186,7 +194,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Solución del espacio y alineación fluida */
+/* Lista fluida sin espacios vacíos */
 .hero-checks {
   list-style: none;
   display: flex;
@@ -216,7 +224,7 @@ h1 {
   margin-top: 2px;
 }
 
-/* CTA Hero */
+/* Botones CTA Generales */
 .cta-button {
   display: inline-flex;
   align-items: center;
@@ -260,6 +268,13 @@ h1 {
   color: var(--text-light);
   font-size: 0.9rem;
   margin-left: 6px;
+}
+
+/* Contenedor CTAs de Sección Intermedios */
+.section-cta-wrapper {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
 }
 
 /* Imagen Hero */
@@ -348,7 +363,7 @@ h1 {
   color: var(--text-muted);
 }
 
-/* Medios de Pago en Tarjetas */
+/* Medios de Pago */
 .payment-methods-section {
   padding: 50px 0;
   background: #ffffff;
@@ -424,7 +439,7 @@ h1 {
   font-weight: 800;
   letter-spacing: 0.08em;
   color: var(--primary-blue);
-  background: #dbeafe;
+  background: #eff6ff;
   padding: 4px 12px;
   border-radius: 20px;
 }
@@ -506,7 +521,7 @@ h1 {
   flex-shrink: 0;
 }
 
-/* Slider de Reseñas Dinámico */
+/* Slider Reseñas */
 .reviews-section {
   padding: 55px 0;
   background: #ffffff;
@@ -634,7 +649,7 @@ h1 {
 }
 
 .order-header {
-  background: #f0f7ff;
+  background: #eff6ff;
   border-bottom: 1px solid #bfdbfe;
   padding: 24px 20px;
   text-align: center;
@@ -731,7 +746,7 @@ input, select {
 input:focus, select:focus {
   outline: none;
   border-color: var(--primary-blue);
-  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .btn-submit {
@@ -867,9 +882,9 @@ input:focus, select:focus {
   text-decoration: none;
 }
 
-/* Footer Completo */
+/* Footer Avyro */
 .site-footer {
-  background-color: var(--primary-navy);
+  background-color: #090d16;
   color: #f8fafc;
   padding: 50px 0 20px 0;
   border-top: 1px solid #1e293b;
@@ -885,14 +900,10 @@ input:focus, select:focus {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 1.2rem;
   font-weight: 800;
   margin-bottom: 12px;
-}
-
-.footer-logo svg {
-  color: #60a5fa;
 }
 
 .footer-about {
@@ -952,7 +963,7 @@ input:focus, select:focus {
 .footer-contact-item svg {
   width: 16px;
   height: 16px;
-  color: #60a5fa;
+  color: var(--primary-blue);
   flex-shrink: 0;
 }
 

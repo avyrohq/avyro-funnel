@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp con código de país (+56 9...)
   const WHATSAPP_NUMERO = '569XXXXXXXX'; 
 
+  const PRECIO_UNITARIO = 34990;
+
   // 1. Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
@@ -58,13 +60,32 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Avance automático suave cada 7 segundos
     setInterval(() => {
       showSlide(currentSlide + 1);
     }, 7000);
   }
 
-  // 3. Manejo del Formulario COD
+  // 3. Actualización dinámica del total según cantidad seleccionada (1 a 5)
+  const cantidadSelect = document.getElementById('cantidad');
+  const summaryTotalAmount = document.getElementById('summaryTotalAmount');
+
+  function calcularTotal(qty) {
+    return qty * PRECIO_UNITARIO;
+  }
+
+  function formatoMoneda(valor) {
+    return '$' + valor.toLocaleString('es-CL') + ' CLP';
+  }
+
+  if (cantidadSelect && summaryTotalAmount) {
+    cantidadSelect.addEventListener('change', (e) => {
+      const qty = parseInt(e.target.value, 10) || 1;
+      const total = calcularTotal(qty);
+      summaryTotalAmount.textContent = formatoMoneda(total);
+    });
+  }
+
+  // 4. Manejo del Formulario COD
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -75,22 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.classList.add('loading');
       submitBtn.innerHTML = '<span>Agendando despacho...</span>';
 
+      const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
+      const totalPagar = calcularTotal(qty);
+
       const formData = {
         nombre: document.getElementById('nombre').value.trim(),
         telefono: document.getElementById('telefono').value.trim(),
-        cantidad: document.getElementById('cantidad').value,
+        cantidad: qty,
+        total: totalPagar,
         direccion: document.getElementById('direccion').value.trim(),
         comuna: document.getElementById('comuna').value.trim(),
         region: document.getElementById('region').value.trim(),
-        producto: 'Taladro 48V 25Nm (2 Baterías + Maletín)',
+        producto: 'Taladro Avyro 48V 25Nm (2 Baterías + Maletín)',
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparar evento de Meta Pixel
+      // Disparar evento Lead en Meta Pixel
       if (typeof fbq !== 'undefined') {
         fbq('track', 'Lead', {
           content_name: formData.producto,
-          value: formData.cantidad === '1' ? 34990 : 64990,
+          value: formData.total,
           currency: 'CLP'
         });
       }
@@ -109,11 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Registro completado:', err);
       }
 
-      // Redirección a WhatsApp con confirmación
+      // Redirección a WhatsApp con datos claros
       const mensajeConfirmacion = encodeURIComponent(
-        `¡Hola! Acabo de registrar mi pedido en la web.\n\n` +
+        `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +
-        `📦 *Cantidad:* ${formData.cantidad} unidad(es)\n` +
+        `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
+        `💰 *Total a pagar al recibir:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
         `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
