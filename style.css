@@ -1,7 +1,9 @@
 :root {
   --font-main: 'Plus Jakarta Sans', sans-serif;
 
-  /* Paleta Avyro: Fondo slate limpio, acento azul degradado y verde de conversión */
+  /* Color exacto del fondo del logo de Avyro */
+  --bg-avyro-dark: #040711;
+  
   --bg-page: #f8fafc;
   --bg-surface: #ffffff;
   --border-color: #e2e8f0;
@@ -9,7 +11,6 @@
   --primary-navy: #090d16;
   --primary-blue: #2563eb;
   --primary-blue-hover: #1d4ed8;
-  --accent-purple: #7c3aed;
   --accent-green: #16a34a;
   --accent-green-hover: #15803d;
   --accent-orange: #ea580c;
@@ -48,20 +49,21 @@ body {
 
 /* Top Announcement */
 .top-announcement {
-  background: linear-gradient(90deg, #090d16 0%, #1e1b4b 100%);
+  background-color: var(--bg-avyro-dark);
   color: #f8fafc;
   font-size: 0.8rem;
   font-weight: 800;
   text-align: center;
   padding: 9px 15px;
   letter-spacing: 0.03em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Header */
+/* Header con fondo fundido del logo */
 .site-header {
-  background: #ffffff;
-  border-bottom: 1px solid var(--border-color);
-  padding: 12px 0;
+  background-color: var(--bg-avyro-dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 0;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -76,33 +78,19 @@ body {
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
-  color: var(--primary-navy);
 }
 
+/* Logo más grande y sin cortes */
 .brand-logo-img {
-  height: 32px;
+  height: 60px;
   width: auto;
   display: block;
+  object-fit: contain;
 }
 
 .footer-logo-img {
-  height: 30px;
-}
-
-.logo-text {
-  font-size: 1.18rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-}
-
-.logo-text strong {
-  color: var(--primary-blue);
-}
-
-.text-white {
-  color: #ffffff;
+  height: 64px;
 }
 
 .header-right {
@@ -117,11 +105,11 @@ body {
   gap: 5px;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--accent-green);
-  background: #f0fdf4;
-  padding: 4px 10px;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 5px 12px;
   border-radius: 20px;
-  border: 1px solid #bbf7d0;
+  border: 1px solid rgba(74, 222, 128, 0.25);
 }
 
 .header-badge svg {
@@ -135,7 +123,7 @@ body {
   text-decoration: none;
   font-size: 0.85rem;
   font-weight: 800;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 8px;
   transition: background 0.2s;
 }
@@ -194,7 +182,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Lista fluida sin espacios vacíos */
 .hero-checks {
   list-style: none;
   display: flex;
@@ -224,7 +211,7 @@ h1 {
   margin-top: 2px;
 }
 
-/* Botones CTA Generales */
+/* Botones CTA */
 .cta-button {
   display: inline-flex;
   align-items: center;
@@ -270,7 +257,6 @@ h1 {
   margin-left: 6px;
 }
 
-/* Contenedor CTAs de Sección Intermedios */
 .section-cta-wrapper {
   margin-top: 35px;
   display: flex;
@@ -882,12 +868,12 @@ input:focus, select:focus {
   text-decoration: none;
 }
 
-/* Footer Avyro */
+/* Footer con fondo fundido del logo */
 .site-footer {
-  background-color: #090d16;
+  background-color: var(--bg-avyro-dark);
   color: #f8fafc;
   padding: 50px 0 20px 0;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-grid {
@@ -900,10 +886,7 @@ input:focus, select:focus {
 .footer-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.2rem;
-  font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .footer-about {
@@ -921,10 +904,11 @@ input:focus, select:focus {
 }
 
 .footer-badges span {
-  background: #1e293b;
-  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px 12px;
   border-radius: 6px;
   color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-col h4 {
@@ -968,7 +952,7 @@ input:focus, select:focus {
 }
 
 .footer-bottom {
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding-top: 20px;
   text-align: center;
   font-size: 0.78rem;
@@ -987,6 +971,14 @@ input:focus, select:focus {
     display: none;
   }
   
+  .brand-logo-img {
+    height: 48px;
+  }
+
+  .footer-logo-img {
+    height: 52px;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 25px;

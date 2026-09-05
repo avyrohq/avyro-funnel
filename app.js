@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const PRECIO_UNITARIO = 34990;
 
-  // 1. Acordeón FAQ
+  // 1. Acordeón FAQ[cite: 2]
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Registro completado:', err);
       }
 
-      // Redirección a WhatsApp con datos claros
+      // Redirección a WhatsApp con confirmación
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +
