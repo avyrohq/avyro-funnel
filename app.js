@@ -71,13 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Autoformateador de Teléfono Chileno (+56 9 1234 5678)
+  // 3. Autoformateador de Teléfono en el formulario visual (+56 9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
       let raw = e.target.value.replace(/\D/g, ''); // Deja solo dígitos
 
-      // Quita el prefijo 569, 56 o 9 si el cliente lo ingresa manualmente para no duplicarlo
       if (raw.startsWith('569')) {
         raw = raw.substring(3);
       } else if (raw.startsWith('56')) {
@@ -86,10 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         raw = raw.substring(1);
       }
 
-      // Limita a los 8 dígitos móviles
       raw = raw.substring(0, 8);
 
-      // Aplica la máscara visual
       if (raw.length === 0) {
         e.target.value = '';
       } else if (raw.length <= 4) {
@@ -100,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Actualización dinámica del total según la oferta seleccionada (1 a 4 kits)
+  // 4. Actualización dinámica del total según la oferta seleccionada
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
@@ -115,8 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cantidadSelect && summaryTotalAmount) {
     cantidadSelect.addEventListener('change', (e) => {
       const qty = parseInt(e.target.value, 10) || 1;
-      const total = obtenerTotal(qty);
-      summaryTotalAmount.textContent = formatoMoneda(total);
+      summaryTotalAmount.textContent = formatoMoneda(obtenerTotal(qty));
     });
   }
 
@@ -133,11 +129,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
       const totalPagar = obtenerTotal(qty);
-      const telefonoFormateado = document.getElementById('telefono').value.trim();
+
+      // Extraer solo los 8 dígitos móviles finales
+      let digitosMovil = document.getElementById('telefono').value.replace(/\D/g, '');
+      if (digitosMovil.startsWith('569')) {
+        digitosMovil = digitosMovil.substring(3);
+      } else if (digitosMovil.startsWith('56')) {
+        digitosMovil = digitosMovil.substring(2);
+      } else if (digitosMovil.startsWith('9')) {
+        digitosMovil = digitosMovil.substring(1);
+      }
+      digitosMovil = digitosMovil.substring(0, 8);
+
+      // Formato compacto para evitar error de fórmula en Google Sheets: '+569XXXXXXXX
+      const telefonoSheet = "'+569" + digitosMovil;
+      const telefonoWhatsApp = "+569" + digitosMovil;
 
       const formData = {
         nombre: document.getElementById('nombre').value.trim(),
-        telefono: telefonoFormateado,
+        telefono: telefonoSheet,
         cantidad: qty,
         total: totalPagar,
         direccion: document.getElementById('direccion').value.trim(),
@@ -177,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
-        `📞 *Teléfono:* ${formData.telefono}\n` +
+        `📞 *Teléfono:* ${telefonoWhatsApp}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
         `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
       );
