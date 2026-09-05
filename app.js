@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Reemplaza por la URL de tu Google Apps Script (/exec) cuando despliegues el backend
-  const APPS_SCRIPT_URL = 'PEGA_AQUI_TU_APPS_SCRIPT_URL'; 
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec'; 
   
   // Tu número de WhatsApp con código de país (+56 9...)
-  const WHATSAPP_NUMERO = '569XXXXXXXX'; 
+  const WHATSAPP_NUMERO = '56922241846'; 
 
   // Escala de precios por volumen con descuentos personalizados
   const PRECIOS_MAP = {
