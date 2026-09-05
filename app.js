@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp con código de país (+56 9...)
   const WHATSAPP_NUMERO = '569XXXXXXXX'; 
 
-  // Acordeón FAQ
+  // 1. Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -20,7 +20,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Manejo del Formulario COD
+  // 2. Slider Dinámico de Reseñas (Atrás / Adelante / Dots)
+  const slides = document.querySelectorAll('.review-slide');
+  const dots = document.querySelectorAll('.slider-dots .dot');
+  const prevBtn = document.getElementById('prevReviewBtn');
+  const nextBtn = document.getElementById('nextReviewBtn');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    if (slides.length === 0) return;
+
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt(e.target.getAttribute('data-index'), 10);
+        showSlide(targetIndex);
+      });
+    });
+
+    // Avance automático suave cada 7 segundos
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 7000);
+  }
+
+  // 3. Manejo del Formulario COD
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -65,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Registro completado:', err);
       }
 
-      // Mensaje de WhatsApp actualizado con opciones de pago al recibir
+      // Redirección a WhatsApp con confirmación
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +

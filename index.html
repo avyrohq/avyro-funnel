@@ -34,13 +34,27 @@
 </head>
 <body>
 
-    <!-- Header / Alerta Superior -->
+    <!-- Barra Superior de Aviso -->
     <div class="top-announcement">
         <span>🚚 ENVÍO GRATIS A TODO CHILE • PAGAS EN EFECTIVO, TARJETA O TRANSFERENCIA AL RECIBIR</span>
     </div>
 
+    <!-- Header Principal -->
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="#" class="header-logo">
+                <i data-lucide="wrench" class="logo-icon"></i>
+                <span class="logo-text">HERRAMIENTAS<strong>PRO</strong></span>
+            </a>
+            <div class="header-right">
+                <span class="header-badge"><i data-lucide="shield-check"></i> Distribuidor Oficial</span>
+                <a href="#pedido" class="header-btn">Comprar Ahora</a>
+            </div>
+        </div>
+    </header>
+
     <!-- Hero Section -->
-    <header class="hero">
+    <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
                 <div class="hero-badge">
@@ -54,10 +68,20 @@
                     Trabaja con total libertad en madera, acero o armado de muebles. Sin cables enredados, sin extensiones y sin interrupciones: mientras usas una batería, recargas la otra.
                 </p>
 
+                <!-- Lista de puntos alineada sin saltos erróneos -->
                 <ul class="hero-checks">
-                    <li><i data-lucide="check-circle-2"></i> <strong>Incluye 2 baterías de litio:</strong> Nunca te quedas a medias.</li>
-                    <li><i data-lucide="check-circle-2"></i> <strong>25 Nm de torque:</strong> Fuerza óptima para atornillar y perforar sin dañar superficies.</li>
-                    <li><i data-lucide="check-circle-2"></i> <strong>Maletín rígido completo:</strong> Brocas, dados, puntas y extensor flexible.</li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>Incluye 2 baterías de litio:</strong> Nunca te quedas a medias mientras trabajas.</span>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>25 Nm de torque:</strong> Fuerza precisa para atornillar y perforar sin dañar materiales.</span>
+                    </li>
+                    <li>
+                        <i data-lucide="check-circle-2"></i>
+                        <span><strong>Maletín rígido completo:</strong> Brocas, dados, puntas y extensor flexible.</span>
+                    </li>
                 </ul>
 
                 <div class="hero-cta-box">
@@ -81,9 +105,9 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Barra de Confianza / Ventajas COD -->
+    <!-- Barra de Confianza -->
     <section class="trust-bar-section">
         <div class="container trust-grid">
             <div class="trust-item">
@@ -110,10 +134,39 @@
         </div>
     </section>
 
+    <!-- Sección Formas de Pago en Tarjetas -->
+    <section class="payment-methods-section">
+        <div class="container">
+            <div class="badge-center">CERO RIESGO PARA TI</div>
+            <h2 class="section-title text-center">Pagas únicamente cuando lo tienes en tus manos</h2>
+            <p class="section-subtitle text-center">No arriesgues tu dinero comprando online por adelantado. Elige tu medio preferido al recibir:</p>
+
+            <div class="payment-cards-grid">
+                <div class="pay-card">
+                    <div class="pay-icon"><i data-lucide="banknote"></i></div>
+                    <h3>Efectivo</h3>
+                    <p>Págale directo al transportista el monto exacto de <strong>$34.990</strong> una vez revises el paquete.</p>
+                </div>
+
+                <div class="pay-card">
+                    <div class="pay-icon"><i data-lucide="credit-card"></i></div>
+                    <h3>Tarjetas de Débito / Crédito</h3>
+                    <p>El repartidor cuenta con máquina POS para que pagues con tu tarjeta física o desde el celular.</p>
+                </div>
+
+                <div class="pay-card">
+                    <div class="pay-icon"><i data-lucide="smartphone"></i></div>
+                    <h3>Transferencia Bancaria</h3>
+                    <p>Transfiere en el mismo instante de la entrega mediante la app de tu banco.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Bloque de Beneficios -->
     <section class="benefits-section">
         <div class="container">
-            <div class="badge-center">POTENCIA Y COMODIDAD</div>
+            <div class="badge-center">POTENCIA Y VERSATILIDAD</div>
             <h2 class="section-title text-center">Todo lo que necesitas para tus proyectos en casa</h2>
             <p class="section-subtitle text-center">Olvídate de buscar alargadores o pagar de más por instalaciones básicas:</p>
 
@@ -139,7 +192,7 @@
                 <div class="benefit-card">
                     <div class="benefit-icon"><i data-lucide="gauge"></i></div>
                     <h3>25 Nm de Par de Apriete</h3>
-                    <p>Fuerza precisa con 2 rangos de velocidad (0-350 / 0-1400 RPM) y reversa para atornillar con control o taladrar con firmeza.</p>
+                    <p>Fuerza precisa con 2 rangos de velocidad (0-350 / 0-1400 RPM) y reversa para atornillar con suavidad o taladrar con firmeza.</p>
                 </div>
             </div>
         </div>
@@ -158,6 +211,83 @@
                     <div class="included-item"><i data-lucide="check"></i> 1x Eje / Extensor Flexible para Zonas Difíciles</div>
                     <div class="included-item"><i data-lucide="check"></i> 1x Set Completo de Brocas, Puntas y Dados</div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Reseñas Dinámicas (Slider) -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="badge-center">OPINIONES VERIFICADAS</div>
+            <h2 class="section-title text-center">Lo que dicen quienes ya lo tienen</h2>
+            <p class="section-subtitle text-center">Más de 250 personas en Chile ya recibieron su kit con pago contra entrega:</p>
+
+            <div class="reviews-slider-container">
+                <button class="slider-btn prev-btn" id="prevReviewBtn" aria-label="Reseña anterior">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+
+                <div class="reviews-wrapper" id="reviewsWrapper">
+                    <!-- Reseña 1 -->
+                    <div class="review-slide active">
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+                        <p class="review-text">"Tenía desconfianza de pedir herramientas por internet, pero llegó al segundo día acá a Puente Alto y le pagué con débito al repartidor. El taladro tiene muy buena fuerza para armar muebles y las 2 baterías salvan mucho."</p>
+                        <div class="reviewer-meta">
+                            <strong>Manuel Contreras</strong>
+                            <span>Comprador verificado • Santiago</span>
+                        </div>
+                    </div>
+
+                    <!-- Reseña 2 -->
+                    <div class="review-slide">
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+                        <p class="review-text">"Excelente producto por las 35 lucas. El maletín viene bien surtido con las puntas y el extensor para lugares chicos. Lo usé para instalar repisas en fierro y madera y anduvo impecable."</p>
+                        <div class="reviewer-meta">
+                            <strong>Cristián Morales V.</strong>
+                            <span>Comprador verificado • Concepción</span>
+                        </div>
+                    </div>
+
+                    <!-- Reseña 3 -->
+                    <div class="review-slide">
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+                        <p class="review-text">"Me llegó hoy en la mañana a Rancagua. El repartidor esperó que abriera la caja antes de transferirle. Todo nuevo, las dos baterías cargaron sin problema. Recomendado 100%."</p>
+                        <div class="reviewer-meta">
+                            <strong>Gonzalo Sepúlveda</strong>
+                            <span>Comprador verificado • Rancagua</span>
+                        </div>
+                    </div>
+
+                    <!-- Reseña 4 -->
+                    <div class="review-slide">
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+                        <p class="review-text">"Lo compré para mi papá que siempre andaba peleando con los alargadores en el patio. Quedó fascinado con el peso liviano y la autonomía. Llegó rápido y en perfecto estado."</p>
+                        <div class="reviewer-meta">
+                            <strong>Rodrigo Abarca</strong>
+                            <span>Comprador verificado • La Florida</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-btn next-btn" id="nextReviewBtn" aria-label="Siguiente reseña">
+                    <i data-lucide="chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Indicadores -->
+            <div class="slider-dots" id="sliderDots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
             </div>
         </div>
     </section>
@@ -295,11 +425,44 @@
         </a>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <p>&copy; 2026 Herramientas Pro Chile. Todos los derechos reservados.</p>
-            <p class="footer-disclaimer">Este sitio web no es parte ni está respaldado por Meta™, Facebook™ o Instagram™. Despachos realizados mediante operadores logísticos locales con pago contra entrega en Chile.</p>
+    <!-- Footer Completo -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <i data-lucide="wrench"></i>
+                    <span>HERRAMIENTAS<strong>PRO</strong></span>
+                </div>
+                <p class="footer-about">Especialistas en herramientas inalámbricas y equipamiento para el hogar y taller con despacho seguro y pago contra entrega en todo Chile.</p>
+                <div class="footer-badges">
+                    <span>🇨🇱 Envíos a todo Chile</span>
+                    <span>🛡️ Garantía 30 Días</span>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Compra Segura</h4>
+                <ul class="footer-links">
+                    <li><a href="#pedido">Pago al Recibir</a></li>
+                    <li><a href="#pedido">Seguimiento de Envíos</a></li>
+                    <li><a href="#pedido">Garantía de Fábrica</a></li>
+                    <li><a href="#pedido">Términos del Servicio</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Atención y Despachos</h4>
+                <p class="footer-contact-item"><i data-lucide="clock"></i> Lunes a Sábado: 09:00 a 19:00 hrs</p>
+                <p class="footer-contact-item"><i data-lucide="truck"></i> Despachos vía Blue Express / Moto Express</p>
+                <p class="footer-contact-item"><i data-lucide="shield-check"></i> Pagas en puerta sin anticipos</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Herramientas Pro Chile. Todos los derechos reservados.</p>
+                <p class="footer-disclaimer">Este sitio web no es parte ni está respaldado por Meta™, Facebook™ o Instagram™. Despachos realizados mediante operadores logísticos locales con pago contra entrega en Chile.</p>
+            </div>
         </div>
     </footer>
 
