@@ -5,8 +5,10 @@
   --sage: #92a98c;
   --gold: #c79c52;
   --ink: #17221d;
-  --muted: #6e746d;
+  --muted: #596159;
   --line: #ded7ca;
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
 }
 
 * {
@@ -19,18 +21,40 @@ html {
 
 body {
   margin: 0;
-  font-family: "DM Sans", sans-serif;
+  font-family: var(--font-main);
   color: var(--ink);
   background: var(--cream);
+  line-height: 1.6;
 }
 
-h1, h2, h3, .serif {
-  font-family: "Fraunces", Georgia, serif;
+.hero-title, .section-heading, .form-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.top-announcement {
+  background-color: var(--ink);
+  color: #fbf5ec;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid #e5ded2;
+  background-color: rgba(251, 245, 236, 0.96);
+  backdrop-filter: blur(8px);
 }
 
 .hero-glow {
-  background: radial-gradient(circle at 72% 18%, rgba(216,91,125,.21), transparent 26%),
-              radial-gradient(circle at 18% 80%, rgba(146,169,140,.24), transparent 28%);
+  background: radial-gradient(circle at 72% 18%, rgba(216,91,125,.18), transparent 28%),
+              radial-gradient(circle at 18% 80%, rgba(146,169,140,.20), transparent 30%);
 }
 
 .nav-link {
@@ -48,7 +72,7 @@ h1, h2, h3, .serif {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   border-radius: 999px;
   padding: 0.82rem 1.35rem;
   font-size: 0.92rem;
@@ -73,7 +97,7 @@ h1, h2, h3, .serif {
 .btn-outline {
   color: var(--ink);
   border: 1px solid #bdb6a9;
-  background: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.65);
 }
 
 .btn-outline:hover {
@@ -82,14 +106,113 @@ h1, h2, h3, .serif {
   transform: translateY(-1px);
 }
 
+.header-cta-btn {
+  padding: 0.6rem 1.15rem !important;
+  font-size: 0.86rem !important;
+}
+
 .eyebrow {
   color: var(--pink-deep);
-  letter-spacing: 0.13em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.72rem;
 }
 
+/* Tarjetas de Beneficios */
+.benefit-card {
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background-color: #ffffff;
+  padding: 1.4rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 4px 15px rgba(23, 34, 29, 0.03);
+  transition: transform 0.2s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-2px);
+}
+
+.benefit-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f8dfe6;
+  color: var(--pink-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Slider de Reseñas */
+.carousel-nav-btn {
+  border-radius: 50%;
+  border: 1px solid #cfc7bb;
+  padding: 0.5rem;
+  background: white;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.carousel-nav-btn:hover {
+  border-color: var(--pink);
+  background-color: #fff6f8;
+  color: var(--pink-deep);
+}
+
+.reviews-slider-track {
+  position: relative;
+  min-height: 180px;
+}
+
+.review-slide {
+  display: none;
+  border-radius: 1.25rem;
+  border: 1px solid #e3dcd0;
+  background-color: #fffdf9;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 4px 20px rgba(23, 34, 29, 0.04);
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.review-slide.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.25rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #d8d2c8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot.active {
+  background: var(--pink);
+  width: 22px;
+  border-radius: 10px;
+}
+
+/* Opciones de Envío */
 .ship-option:has(input:checked) {
   border-color: var(--pink);
   box-shadow: 0 0 0 3px rgba(216,91,125,.13);

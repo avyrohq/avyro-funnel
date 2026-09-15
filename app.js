@@ -5,14 +5,58 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';[cite: 6]
 
-  // Escala de precios para el Bálsamo Vitalis
+  // Nueva escala de precios
   const PRECIOS_MAP = {
-    1: 12990,
+    1: 14990,
     2: 19990,
-    3: 26990
+    3: 29990,
+    4: 34990
   };
 
-  // 1. Autoformateador de Teléfono Chileno (9 1234 5678)
+  // 1. Slider de Reseñas (Flechas + Dots + Intervalo)
+  const slides = document.querySelectorAll('.review-slide');
+  const dots = document.querySelectorAll('.slider-dots .dot');
+  const prevBtn = document.getElementById('prevReviewBtn');
+  const nextBtn = document.getElementById('nextReviewBtn');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    if (!slides.length) return;
+
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt(e.target.getAttribute('data-index'), 10);
+        showSlide(targetIndex);
+      });
+    });
+
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 8000);
+  }
+
+  // 2. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -36,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Actualización dinámica del total según oferta
+  // 3. Actualización dinámica del total según la oferta seleccionada
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
@@ -44,15 +88,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return '$' + valor.toLocaleString('es-CL') + ' CLP';
   }
 
-  if (cantidadSelect && summaryTotalAmount) {
-    cantidadSelect.addEventListener('change', (e) => {
-      const qty = parseInt(e.target.value, 10) || 2;
-      const total = PRECIOS_MAP[qty] || 19990;
-      summaryTotalAmount.textContent = formatoMoneda(total);
-    });
+  function actualizarTotal() {
+    if (!cantidadSelect || !summaryTotalAmount) return;
+    const qty = parseInt(cantidadSelect.value, 10) || 2;
+    const total = PRECIOS_MAP[qty] || 19990;
+    summaryTotalAmount.textContent = formatoMoneda(total);
   }
 
-  // 3. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
+  if (cantidadSelect) {
+    cantidadSelect.addEventListener('change', actualizarTotal);
+    actualizarTotal(); // Ejecutar al cargar para asegurar que inicie con la oferta por defecto ($19.990)
+  }
+
+  // 4. Manejo del Formulario COD
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -68,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 2;
       const totalPagar = PRECIOS_MAP[qty] || 19990;
 
-      // Limpieza de dígitos telefónicos
+      // Limpieza de teléfono
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -85,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const regionVal = regionSelect ? regionSelect.value : '';
 
       const shippingSelected = document.querySelector('input[name="shipping"]:checked');
-      const metodoEnvio = shippingSelected ? shippingSelected.value : 'Envío estándar';
+      const metodoEnvio = shippingSelected ? shippingSelected.value : 'Envío estándar a regiones';
 
       const formData = {
         nombre: (document.getElementById('nombre').value || '').trim(),
@@ -100,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparo Lead Meta Pixel
+      // Disparar evento Lead en Meta Pixel
       if (typeof fbq !== 'undefined') {
         try {
           fbq('track', 'Lead', {
@@ -113,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Envío asíncrono a Google Sheets
+      // Envío asíncrono a Google Sheets en segundo plano
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {[cite: 6]
         try {
           fetch(APPS_SCRIPT_URL, {
@@ -123,11 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(formData)
           }).catch(errFetch => console.warn('Fetch error:', errFetch));
         } catch (errPost) {
-          console.warn('Error sheets:', errPost);
+          console.warn('Error post sheets:', errPost);
         }
       }
 
-      // Mensaje estructurado hacia WhatsApp
+      // Mensaje de WhatsApp
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web de Coreanas (Avyro).\n\n` +
         `🌸 *Producto:* ${formData.producto}\n` +
@@ -137,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📞 *Teléfono:* ${telefonoWhatsApp}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
-        `Confirmo que pagaré al repartidor al recibir en mi domicilio (Efectivo, Tarjeta o Transferencia).`
+        `Confirmo que pagaré al repartidor al recibir en mi domicilio (Efectivo, Tarjeta o Transferencia bancaria).`
       );
 
       const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;[cite: 6]
