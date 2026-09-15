@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Tu URL de Google Apps Script (/exec)
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec';[cite: 6]
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec';
   
   // Tu número de WhatsApp receptor
-  const WHATSAPP_NUMERO = '56922241846';[cite: 6]
+  const WHATSAPP_NUMERO = '56922241846';
 
-  // Valores base del producto
+  // Valores base de la oferta
   const PRODUCTO_NOMBRE = '2x Bálsamo hidratante VITALIS';
   const CANTIDAD_FIJA = 2;
   const PRECIO_BASE = 19990;
@@ -14,21 +14,31 @@ document.addEventListener('DOMContentLoaded', () => {
     return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
   }
 
-  // 1. Cálculo Dinámico de Envío y Total en Tiempo Real
+  // ========================================================
+  // 1. Cálculo Dinámico de Envío (Suma Garantizada)
+  // ========================================================
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
   const summaryShippingText = document.getElementById('summaryShippingText');
-  const shippingCards = document.querySelectorAll('.ship-option');
-  const shippingRadios = document.querySelectorAll('input[name="shipping"]');
 
-  function actualizarTotalConEnvio() {
+  function recalcularTotal() {
+    // Buscar la opción de envío actualmente marcada
     const radioSeleccionado = document.querySelector('input[name="shipping"]:checked');
-    const costoEnvio = radioSeleccionado ? parseInt(radioSeleccionado.getAttribute('data-cost'), 10) || 0 : 0;
+    
+    let costoEnvio = 0;
+    if (radioSeleccionado) {
+      // Leemos directamente el atributo data-cost o evaluamos por texto
+      const costAttr = radioSeleccionado.getAttribute('data-cost');
+      costoEnvio = costAttr !== null ? parseInt(costAttr, 10) : (radioSeleccionado.value.includes('990') ? 990 : 0);
+    }
+
     const totalFinal = PRECIO_BASE + costoEnvio;
 
+    // Actualizar el texto del total en pantalla
     if (summaryTotalAmount) {
       summaryTotalAmount.textContent = formatoMoneda(totalFinal);
     }
 
+    // Actualizar el texto del costo de envío en pantalla
     if (summaryShippingText) {
       if (costoEnvio === 0) {
         summaryShippingText.textContent = 'GRATIS';
@@ -42,29 +52,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return { costoEnvio, totalFinal };
   }
 
-  // Listeners directos sobre los radios
-  shippingRadios.forEach(radio => {
-    radio.addEventListener('change', actualizarTotalConEnvio);
-    radio.addEventListener('input', actualizarTotalConEnvio);
+  // Escuchar cualquier cambio en los radios de envío a nivel global
+  document.addEventListener('change', (e) => {
+    if (e.target && e.target.name === 'shipping') {
+      recalcularTotal();
+    }
   });
 
-  // Listeners en toda la tarjeta de la opción para asegurar activación inmediata en cualquier pantalla
-  shippingCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const radio = card.querySelector('input[type="radio"]');
-      if (radio && !radio.checked) {
-        radio.checked = true;
-        // Forzar disparo del evento change para Tailwind y estilos
-        radio.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-      actualizarTotalConEnvio();
-    });
-  });
+  // Ejecución inmediata al cargar la página
+  recalcularTotal();
 
-  // Ejecución inicial al renderizar
-  actualizarTotalConEnvio();
-
+  // ========================================================
   // 2. Autoformateador de Teléfono Chileno (9 1234 5678)
+  // ========================================================
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -88,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
+  // ========================================================
+  // 3. Envío Asíncrono a Google Sheets y WhatsApp
+  // ========================================================
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -101,9 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
       }
 
-      const { costoEnvio, totalFinal } = actualizarTotalConEnvio();
+      const { costoEnvio, totalFinal } = recalcularTotal();
 
-      // Limpieza de dígitos telefónicos
+      // Limpieza de teléfono
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -135,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparo de evento Lead en Meta Pixel
+      // Disparo Lead Meta Pixel
       if (typeof fbq !== 'undefined') {
         try {
           fbq('track', 'Lead', {
@@ -149,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Envío asíncrono a Google Sheets
-      if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {[cite: 6]
+      if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
         try {
           fetch(APPS_SCRIPT_URL, {
             method: 'POST',
@@ -175,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `Confirmo que pagaré al repartidor al recibir en mi domicilio (Efectivo, Tarjeta o Transferencia bancaria).`
       );
 
-      const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;[cite: 6]
+      const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;
 
       setTimeout(() => {
         window.location.href = targetUrl;
