@@ -8,7 +8,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 
-  <!-- Tailwind CDN & Lucide Icons & Fuentes Elegantes -->
+  <!-- Tailwind CDN, Lucide Icons & Fuentes -->
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
 </head>
 <body class="w-full overflow-x-hidden">
 
-  <!-- Barra Superior -->
+  <!-- Barra Superior de Aviso -->
   <div class="top-announcement">
     🚚 ENVÍO A TODO CHILE • PAGAS EN EFECTIVO, TARJETA O TRANSFERENCIA AL RECIBIR EN CASA
   </div>
@@ -172,7 +172,7 @@
       </div>
     </section>
 
-    <!-- Reseñas Verticales con Fotos Reales del Producto -->
+    <!-- Reseñas Verticales con Fotos Reales -->
     <section id="resenas" class="w-full py-16 sm:py-20 bg-white border-y border-[#ded7ca]">
       <div class="mx-auto max-w-4xl px-5 lg:px-8">
         <div class="mb-9 text-center">
@@ -182,10 +182,10 @@
         </div>
 
         <div class="space-y-6">
-          <!-- Reseña 1: imagen-1.webp -->
+          <!-- Reseña 1 -->
           <article class="review-row-card">
             <div class="review-image-box">
-              <img src="assets/imagen-1.png" alt="Foto real de cliente 1" class="review-product-img">
+              <img src="assets/imagen-1.png" alt="Foto real de clienta 1" class="review-product-img">
             </div>
             <div class="review-content-box">
               <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
@@ -197,10 +197,10 @@
             </div>
           </article>
 
-          <!-- Reseña 2: imagen-2.webp -->
+          <!-- Reseña 2 -->
           <article class="review-row-card">
             <div class="review-image-box">
-              <img src="assets/imagen-2.png" alt="Foto real de cliente 2" class="review-product-img">
+              <img src="assets/imagen-2.png" alt="Foto real de clienta 2" class="review-product-img">
             </div>
             <div class="review-content-box">
               <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
@@ -212,10 +212,10 @@
             </div>
           </article>
 
-          <!-- Reseña 3: imagen-3.webp -->
+          <!-- Reseña 3 -->
           <article class="review-row-card">
             <div class="review-image-box">
-              <img src="assets/imagen-3.png" alt="Foto real de cliente 3" class="review-product-img">
+              <img src="assets/imagen-3.png" alt="Foto real de clienta 3" class="review-product-img">
             </div>
             <div class="review-content-box">
               <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
@@ -227,10 +227,10 @@
             </div>
           </article>
 
-          <!-- Reseña 4: imagen-4.webp -->
+          <!-- Reseña 4 -->
           <article class="review-row-card">
             <div class="review-image-box">
-              <img src="assets/imagen-4.png" alt="Foto real de cliente 4" class="review-product-img">
+              <img src="assets/imagen-4.png" alt="Foto real de clienta 4" class="review-product-img">
             </div>
             <div class="review-content-box">
               <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
@@ -242,10 +242,10 @@
             </div>
           </article>
 
-          <!-- Reseña 5: imagen-5.webp -->
+          <!-- Reseña 5 -->
           <article class="review-row-card">
             <div class="review-image-box">
-              <img src="assets/imagen-5.png" alt="Foto real de cliente 5" class="review-product-img">
+              <img src="assets/imagen-5.png" alt="Foto real de clienta 5" class="review-product-img">
             </div>
             <div class="review-content-box">
               <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
@@ -308,20 +308,24 @@
             </div>
           </div>
 
-          <!-- Formulario COD con total reactivo al envío -->
+          <!-- Formulario COD -->
           <form id="orderForm" class="rounded-[1.5rem] bg-white p-6 shadow-md sm:p-8 border border-[#ded7ca]">
             <h3 class="form-title mb-4 text-xl sm:text-2xl text-[#17221d]">REALIZA TU PEDIDO - PÁGALO AL RECIBIR</h3>
             
-            <div class="mb-5 rounded-xl bg-[#fbf5ec] p-4 border border-[#ded7ca] text-sm">
-              <div class="flex justify-between mb-1">
+            <div class="mb-5 rounded-xl bg-[#fbf5ec] p-4 border border-[#ded7ca] text-sm space-y-1">
+              <div class="flex justify-between">
                 <span class="text-[#5d655c]">Promoción:</span>
                 <strong class="text-[#17221d]" id="summaryProductName">2x Bálsamo hidratante VITALIS</strong>
               </div>
-              <div class="flex justify-between mb-2">
-                <span class="text-[#5d655c]">Despacho:</span>
-                <span class="font-bold text-green-700" id="summaryShippingText">GRATIS A TU PUERTA 🇨🇱</span>
+              <div class="flex justify-between">
+                <span class="text-[#5d655c]">Subtotal producto:</span>
+                <strong class="text-[#17221d]">$19.990 CLP</strong>
               </div>
-              <div class="flex justify-between border-t border-dashed border-[#ded7ca] pt-2 text-base font-bold items-center">
+              <div class="flex justify-between">
+                <span class="text-[#5d655c]">Costo de despacho:</span>
+                <strong id="summaryShippingText" class="text-green-700 font-bold">GRATIS</strong>
+              </div>
+              <div class="flex justify-between border-t border-dashed border-[#ded7ca] pt-2 text-base font-bold items-center mt-2">
                 <span class="text-[#17221d]">Total a pagar:</span>
                 <span class="text-[#b84264] text-2xl font-extrabold" id="summaryTotalAmount">$19.990 CLP</span>
               </div>

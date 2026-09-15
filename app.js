@@ -5,24 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';[cite: 6]
 
-  // Valores fijos del producto
+  // Valores base del producto
   const PRODUCTO_NOMBRE = '2x Bálsamo hidratante VITALIS';
   const CANTIDAD_FIJA = 2;
   const PRECIO_BASE = 19990;
 
-  // 1. Formateador de moneda
   function formatoMoneda(valor) {
     return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
   }
 
-  // 2. Actualización de Total según Método de Envío
+  // 1. Cálculo y suma en tiempo real del costo de envío
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
   const summaryShippingText = document.getElementById('summaryShippingText');
   const shippingRadios = document.querySelectorAll('input[name="shipping"]');
 
-  function calcularTotalConEnvio() {
-    const selected = document.querySelector('input[name="shipping"]:checked');
-    const costoEnvio = selected ? parseInt(selected.getAttribute('data-cost'), 10) || 0 : 0;
+  function actualizarTotalConEnvio() {
+    const radioSeleccionado = document.querySelector('input[name="shipping"]:checked');
+    const costoEnvio = radioSeleccionado ? parseInt(radioSeleccionado.getAttribute('data-cost'), 10) || 0 : 0;
     const totalFinal = PRECIO_BASE + costoEnvio;
 
     if (summaryTotalAmount) {
@@ -31,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (summaryShippingText) {
       if (costoEnvio === 0) {
-        summaryShippingText.textContent = 'GRATIS A TU PUERTA 🇨🇱';
-        summaryShippingText.className = 'font-bold text-green-700';
+        summaryShippingText.textContent = 'GRATIS';
+        summaryShippingText.className = 'text-green-700 font-bold';
       } else {
-        summaryShippingText.textContent = '$990 (A todo Chile)';
-        summaryShippingText.className = 'font-bold text-[#b84264]';
+        summaryShippingText.textContent = '+$990 CLP';
+        summaryShippingText.className = 'text-[#b84264] font-bold';
       }
     }
 
@@ -43,11 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   shippingRadios.forEach(radio => {
-    radio.addEventListener('change', calcularTotalConEnvio);
+    radio.addEventListener('change', actualizarTotalConEnvio);
   });
-  calcularTotalConEnvio();
+  actualizarTotalConEnvio();
 
-  // 3. Autoformateador de Teléfono Chileno (9 1234 5678)
+  // 2. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -71,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Envío a Sheets y Redirección a WhatsApp
+  // 3. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -84,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
       }
 
-      const { totalFinal } = calcularTotalConEnvio();
+      const { costoEnvio, totalFinal } = actualizarTotalConEnvio();
 
       // Limpieza de dígitos telefónicos
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
@@ -150,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `¡Hola! Acabo de registrar mi pedido en la web de Coreanas (Avyro).\n\n` +
         `🌸 *Producto:* ${formData.producto}\n` +
         `📦 *Cantidad:* ${formData.cantidad} unidades (Pack Oferta)\n` +
-        `🚚 *Método:* ${formData.envio}\n` +
+        `🚚 *Método:* ${formData.envio} (${costoEnvio === 0 ? 'Gratis' : '$990'})\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📞 *Teléfono:* ${telefonoWhatsApp}\n` +

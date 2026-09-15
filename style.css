@@ -146,7 +146,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Tarjetas de Reseñas Verticales con Foto a la Izquierda */
+/* Tarjetas de Reseñas Verticales con Foto */
 .review-row-card {
   display: grid;
   grid-template-columns: 110px 1fr;
@@ -178,17 +178,6 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-}
-
-.review-img-fallback {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #8b7661;
 }
 
 .review-content-box {
