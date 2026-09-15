@@ -5,12 +5,49 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';[cite: 6]
 
-  // Valores de oferta fija
+  // Valores fijos del producto
   const PRODUCTO_NOMBRE = '2x Bálsamo hidratante VITALIS';
   const CANTIDAD_FIJA = 2;
-  const TOTAL_FIJO = 19990;
+  const PRECIO_BASE = 19990;
 
-  // 1. Autoformateador de Teléfono Chileno (9 1234 5678)
+  // 1. Formateador de moneda
+  function formatoMoneda(valor) {
+    return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
+  }
+
+  // 2. Actualización de Total según Método de Envío
+  const summaryTotalAmount = document.getElementById('summaryTotalAmount');
+  const summaryShippingText = document.getElementById('summaryShippingText');
+  const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+
+  function calcularTotalConEnvio() {
+    const selected = document.querySelector('input[name="shipping"]:checked');
+    const costoEnvio = selected ? parseInt(selected.getAttribute('data-cost'), 10) || 0 : 0;
+    const totalFinal = PRECIO_BASE + costoEnvio;
+
+    if (summaryTotalAmount) {
+      summaryTotalAmount.textContent = formatoMoneda(totalFinal);
+    }
+
+    if (summaryShippingText) {
+      if (costoEnvio === 0) {
+        summaryShippingText.textContent = 'GRATIS A TU PUERTA 🇨🇱';
+        summaryShippingText.className = 'font-bold text-green-700';
+      } else {
+        summaryShippingText.textContent = '$990 (A todo Chile)';
+        summaryShippingText.className = 'font-bold text-[#b84264]';
+      }
+    }
+
+    return { costoEnvio, totalFinal };
+  }
+
+  shippingRadios.forEach(radio => {
+    radio.addEventListener('change', calcularTotalConEnvio);
+  });
+  calcularTotalConEnvio();
+
+  // 3. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -34,13 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
+  // 4. Envío a Sheets y Redirección a WhatsApp
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
-
-  function formatoMoneda(valor) {
-    return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
-  }
 
   if (orderForm) {
     orderForm.addEventListener('submit', (e) => {
@@ -50,6 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.classList.add('loading');
         submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
       }
+
+      const { totalFinal } = calcularTotalConEnvio();
 
       // Limpieza de dígitos telefónicos
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
@@ -74,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nombre: (document.getElementById('nombre').value || '').trim(),
         telefono: telefonoSheet,
         cantidad: CANTIDAD_FIJA,
-        total: TOTAL_FIJO,
+        total: totalFinal,
         direccion: (document.getElementById('direccion').value || '').trim(),
         comuna: (document.getElementById('comuna').value || '').trim(),
         region: regionVal,
