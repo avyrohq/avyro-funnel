@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';[cite: 6]
 
-  // Escala de precios de ofertas
+  // Escala de precios
   const PRECIOS_MAP = {
     1: 14990,
     2: 19990,
@@ -13,74 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     4: 34990
   };
 
-  // ========================================================
-  // 1. Carrusel de Reseñas (Flechas + Dots + Rotación)
-  // ========================================================
-  const slides = document.querySelectorAll('.review-slide');
-  const dots = document.querySelectorAll('.slider-dots .dot');
-  const prevBtn = document.getElementById('prevReviewBtn');
-  const nextBtn = document.getElementById('nextReviewBtn');
-  let currentSlide = 0;
-  let autoplayTimer = null;
-
-  function showSlide(index) {
-    if (!slides.length) return;
-
-    if (index >= slides.length) {
-      currentSlide = 0;
-    } else if (index < 0) {
-      currentSlide = slides.length - 1;
-    } else {
-      currentSlide = index;
-    }
-
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === currentSlide);
-    });
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentSlide);
-    });
-  }
-
-  function restartAutoplay() {
-    if (autoplayTimer) clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(() => {
-      showSlide(currentSlide + 1);
-    }, 7000);
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showSlide(currentSlide - 1);
-      restartAutoplay();
-    });
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      showSlide(currentSlide + 1);
-      restartAutoplay();
-    });
-  }
-
-  dots.forEach(dot => {
-    dot.addEventListener('click', (e) => {
-      const targetIndex = parseInt(e.currentTarget.getAttribute('data-index'), 10);
-      showSlide(targetIndex);
-      restartAutoplay();
-    });
-  });
-
-  restartAutoplay();
-
-  // ========================================================
-  // 2. Autoformateador de Teléfono (+56 9 1234 5678)
-  // ========================================================
+  // 1. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -104,9 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========================================================
-  // 3. Actualización de Total en Tiempo Real
-  // ========================================================
+  // 2. Actualización de Total en Tiempo Real (Resuelto de forma síncrona y reactiva)
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
 
@@ -124,12 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cantidadSelect) {
     cantidadSelect.addEventListener('change', actualizarPrecioEnVivo);
     cantidadSelect.addEventListener('input', actualizarPrecioEnVivo);
+    cantidadSelect.addEventListener('click', actualizarPrecioEnVivo);
+    // Ejecución inicial para garantizar que cargue con el valor seleccionado
     actualizarPrecioEnVivo();
   }
 
-  // ========================================================
-  // 4. Envío Asíncrono a Google Sheets y WhatsApp
-  // ========================================================
+  // 3. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -145,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 2;
       const totalPagar = PRECIOS_MAP[qty] || 19990;
 
-      // Limpieza de teléfono
+      // Limpieza de dígitos telefónicos
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -177,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparar Lead en Meta Pixel
+      // Disparo de evento Lead en Meta Pixel
       if (typeof fbq !== 'undefined') {
         try {
           fbq('track', 'Lead', {
@@ -190,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Envío en segundo plano a Google Sheets
+      // Envío asíncrono a Google Sheets
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {[cite: 6]
         try {
           fetch(APPS_SCRIPT_URL, {
@@ -204,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Redirección a WhatsApp
+      // Mensaje estructurado hacia WhatsApp
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web de Coreanas (Avyro).\n\n` +
         `🌸 *Producto:* ${formData.producto}\n` +

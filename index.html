@@ -172,93 +172,110 @@
       </div>
     </section>
 
-    <!-- Reseñas Dinámicas con Flechas -->
+    <!-- Reseñas Verticales con Foto del Cliente a la Izquierda -->
     <section id="resenas" class="w-full py-16 sm:py-20 bg-white border-y border-[#ded7ca]">
-      <div class="mx-auto max-w-7xl px-5 lg:px-8">
-        <div class="mb-7 flex items-end justify-between gap-4">
-          <div>
-            <p class="eyebrow mb-2">Reseñas reales</p>
-            <h2 class="section-heading text-3xl sm:text-4xl text-[#17221d]">Lo que dicen nuestras clientas</h2>
-          </div>
-          <div class="flex gap-2">
-            <button id="prevReviewBtn" class="carousel-nav-btn" type="button" aria-label="Ver reseña anterior">
-              <i data-lucide="arrow-left" class="h-5 w-5"></i>
-            </button>
-            <button id="nextReviewBtn" class="carousel-nav-btn" type="button" aria-label="Ver reseña siguiente">
-              <i data-lucide="arrow-right" class="h-5 w-5"></i>
-            </button>
-          </div>
+      <div class="mx-auto max-w-4xl px-5 lg:px-8">
+        <div class="mb-9 text-center">
+          <p class="eyebrow mb-2">Reseñas reales</p>
+          <h2 class="section-heading text-3xl sm:text-4xl text-[#17221d]">Lo que dicen nuestras clientas</h2>
+          <p class="text-sm text-[#5d655c] mt-2">Fotos enviadas por compradoras verificadas al recibir su pedido en Chile.</p>
         </div>
 
-        <div class="reviews-slider-track" id="reviewsTrack">
-          <!-- Slide 1 -->
-          <article class="review-slide active">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Llegó súper rápido y el bálsamo es exquisito. Ya voy en mi tercer pedido, me encanta cómo deja la piel hidratada y con brillo natural sin quedar grasoso."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">María Valenzuela</strong>
-              <span class="text-xs text-[#737a72]">Curicó</span>
+        <div class="space-y-6">
+          <!-- Reseña 1 -->
+          <article class="review-row-card">
+            <div class="review-image-box">
+              <img src="assets/review-1.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Foto de producto recibida" class="review-product-img">
+              <span class="review-img-fallback">
+                <i data-lucide="camera" class="h-6 w-6 mb-1 text-[#b84264]"></i>
+                Foto real
+              </span>
+            </div>
+            <div class="review-content-box">
+              <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
+              <p class="review-body-text">"Llegó súper rápido y el bálsamo es exquisito. Ya voy en mi tercer pedido, me encanta cómo deja la piel hidratada y con brillo natural sin quedar grasoso."</p>
+              <div class="text-sm mt-3 pt-3 border-t border-[#f0e9df]">
+                <strong class="text-[#17221d] font-bold">María Valenzuela</strong>
+                <span class="text-xs text-[#737a72] ml-1">• Curicó</span>
+              </div>
             </div>
           </article>
 
-          <!-- Slide 2 -->
-          <article class="review-slide">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Llegó muy bien empaquetado, tiene un aroma suave muy agradable. Le pagué con la tarjeta al transportista cuando me entregó la caja."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">Génesis Guevara</strong>
-              <span class="text-xs text-[#737a72]">Calama</span>
+          <!-- Reseña 2 -->
+          <article class="review-row-card">
+            <div class="review-image-box">
+              <img src="assets/review-2.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Foto de producto recibida" class="review-product-img">
+              <span class="review-img-fallback">
+                <i data-lucide="camera" class="h-6 w-6 mb-1 text-[#b84264]"></i>
+                Foto real
+              </span>
+            </div>
+            <div class="review-content-box">
+              <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
+              <p class="review-body-text">"Llegó muy bien empaquetado, tiene un aroma suave muy agradable. Le pagué con tarjeta de débito al transportista cuando me entregó la cajita."</p>
+              <div class="text-sm mt-3 pt-3 border-t border-[#f0e9df]">
+                <strong class="text-[#17221d] font-bold">Génesis Guevara</strong>
+                <span class="text-xs text-[#737a72] ml-1">• Calama</span>
+              </div>
             </div>
           </article>
 
-          <!-- Slide 3 -->
-          <article class="review-slide">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Me encanta este formato en barra. Lo llevo siempre en la cartera y me hidrata el contorno de ojos y labios durante el día de trabajo. Excelente compra."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">Valeria Moraga</strong>
-              <span class="text-xs text-[#737a72]">Villa Alemana</span>
+          <!-- Reseña 3 -->
+          <article class="review-row-card">
+            <div class="review-image-box">
+              <img src="assets/review-3.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Foto de producto recibida" class="review-product-img">
+              <span class="review-img-fallback">
+                <i data-lucide="camera" class="h-6 w-6 mb-1 text-[#b84264]"></i>
+                Foto real
+              </span>
+            </div>
+            <div class="review-content-box">
+              <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
+              <p class="review-body-text">"Me encanta este formato en barra. Lo llevo siempre en la cartera y me hidrata el contorno de ojos y labios durante el día de trabajo. Excelente compra."</p>
+              <div class="text-sm mt-3 pt-3 border-t border-[#f0e9df]">
+                <strong class="text-[#17221d] font-bold">Valeria Moraga</strong>
+                <span class="text-xs text-[#737a72] ml-1">• Villa Alemana</span>
+              </div>
             </div>
           </article>
 
-          <!-- Slide 4 -->
-          <article class="review-slide">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Aproveché la oferta de 2 barras para regalarle una a mi mamá. Ambas tenemos piel seca y se nota la diferencia a los pocos días. Muy buena atención por WhatsApp."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">Camila Santander</strong>
-              <span class="text-xs text-[#737a72]">La Serena</span>
+          <!-- Reseña 4 -->
+          <article class="review-row-card">
+            <div class="review-image-box">
+              <img src="assets/review-4.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Foto de producto recibida" class="review-product-img">
+              <span class="review-img-fallback">
+                <i data-lucide="camera" class="h-6 w-6 mb-1 text-[#b84264]"></i>
+                Foto real
+              </span>
+            </div>
+            <div class="review-content-box">
+              <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
+              <p class="review-body-text">"Aproveché la oferta de 2 barras para regalarle una a mi mamá. Ambas tenemos piel seca y se nota la diferencia a los pocos días. Muy buena atención por WhatsApp."</p>
+              <div class="text-sm mt-3 pt-3 border-t border-[#f0e9df]">
+                <strong class="text-[#17221d] font-bold">Camila Santander</strong>
+                <span class="text-xs text-[#737a72] ml-1">• La Serena</span>
+              </div>
             </div>
           </article>
 
-          <!-- Slide 5 -->
-          <article class="review-slide">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Llegó en 48 horas a Chillán. Le transferí al repartidor en el momento en que me pasó el paquete. El producto viene sellado y original."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">Francisca Navarrete</strong>
-              <span class="text-xs text-[#737a72]">Chillán</span>
+          <!-- Reseña 5 -->
+          <article class="review-row-card">
+            <div class="review-image-box">
+              <img src="assets/review-5.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Foto de producto recibida" class="review-product-img">
+              <span class="review-img-fallback">
+                <i data-lucide="camera" class="h-6 w-6 mb-1 text-[#b84264]"></i>
+                Foto real
+              </span>
+            </div>
+            <div class="review-content-box">
+              <div class="mb-2 text-[#c79c52] tracking-wider">★★★★★</div>
+              <p class="review-body-text">"Llegó en 48 horas a Chillán. Le transferí al repartidor en el momento en que me pasó el paquete. El producto viene sellado, original y deja la piel hermosa."</p>
+              <div class="text-sm mt-3 pt-3 border-t border-[#f0e9df]">
+                <strong class="text-[#17221d] font-bold">Francisca Navarrete</strong>
+                <span class="text-xs text-[#737a72] ml-1">• Chillán</span>
+              </div>
             </div>
           </article>
-
-          <!-- Slide 6 -->
-          <article class="review-slide">
-            <div class="mb-2 text-[#c79c52]">★★★★★</div>
-            <p class="mb-4 text-sm sm:text-base leading-relaxed text-[#17221d]">"Deja un efecto glow muy lindo en los pómulos sin necesidad de usar maquillaje pesado. Lo recomiendo totalmente para quienes buscan practicidad."</p>
-            <div class="text-sm">
-              <strong class="block text-[#17221d] font-bold">Lorena Sepúlveda</strong>
-              <span class="text-xs text-[#737a72]">Rancagua</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="slider-dots" id="sliderDots">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
-          <span class="dot" data-index="3"></span>
-          <span class="dot" data-index="4"></span>
-          <span class="dot" data-index="5"></span>
         </div>
       </div>
     </section>
