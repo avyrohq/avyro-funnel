@@ -172,7 +172,7 @@
       </div>
     </section>
 
-    <!-- Reseñas Verticales con Fotos Reales -->
+    <!-- Reseñas Verticales con Fotos Reales (.png) -->
     <section id="resenas" class="w-full py-16 sm:py-20 bg-white border-y border-[#ded7ca]">
       <div class="mx-auto max-w-4xl px-5 lg:px-8">
         <div class="mb-9 text-center">
@@ -182,7 +182,7 @@
         </div>
 
         <div class="space-y-6">
-          <!-- Reseña 1 -->
+          <!-- Reseña 1: imagen-1.png -->
           <article class="review-row-card">
             <div class="review-image-box">
               <img src="assets/imagen-1.png" alt="Foto real de clienta 1" class="review-product-img">
@@ -197,7 +197,7 @@
             </div>
           </article>
 
-          <!-- Reseña 2 -->
+          <!-- Reseña 2: imagen-2.png -->
           <article class="review-row-card">
             <div class="review-image-box">
               <img src="assets/imagen-2.png" alt="Foto real de clienta 2" class="review-product-img">
@@ -212,7 +212,7 @@
             </div>
           </article>
 
-          <!-- Reseña 3 -->
+          <!-- Reseña 3: imagen-3.png -->
           <article class="review-row-card">
             <div class="review-image-box">
               <img src="assets/imagen-3.png" alt="Foto real de clienta 3" class="review-product-img">
@@ -227,7 +227,7 @@
             </div>
           </article>
 
-          <!-- Reseña 4 -->
+          <!-- Reseña 4: imagen-4.png -->
           <article class="review-row-card">
             <div class="review-image-box">
               <img src="assets/imagen-4.png" alt="Foto real de clienta 4" class="review-product-img">
@@ -242,7 +242,7 @@
             </div>
           </article>
 
-          <!-- Reseña 5 -->
+          <!-- Reseña 5: imagen-5.png -->
           <article class="review-row-card">
             <div class="review-image-box">
               <img src="assets/imagen-5.png" alt="Foto real de clienta 5" class="review-product-img">
@@ -273,10 +273,10 @@
 
         <div class="grid gap-8 lg:grid-cols-[.9fr_1.1fr] items-start">
           <!-- Opciones de Envío -->
-          <div class="space-y-3">
-            <label class="ship-option block cursor-pointer rounded-2xl border border-[#d7cfbf] bg-[#fbf5ec] p-5">
-              <input class="sr-only" type="radio" name="shipping" value="Envío Express Región Metropolitana" data-cost="0" checked>
-              <span class="flex items-start justify-between gap-4">
+          <div class="space-y-3" id="shippingOptionsContainer">
+            <label class="ship-option block cursor-pointer rounded-2xl border border-[#d7cfbf] bg-[#fbf5ec] p-5 transition-all">
+              <input class="sr-only shipping-radio" type="radio" name="shipping" value="Envío Express Región Metropolitana" data-cost="0" checked>
+              <span class="flex items-start justify-between gap-4 pointer-events-none">
                 <span>
                   <strong class="block text-base sm:text-lg font-bold text-[#17221d]">Envío Express Región Metropolitana</strong>
                   <span class="mt-1 block text-xs sm:text-sm text-[#697168]">RM · 24 a 48 horas hábiles</span>
@@ -285,14 +285,14 @@
               </span>
             </label>
 
-            <label class="ship-option block cursor-pointer rounded-2xl border border-[#d7cfbf] bg-[#fbf5ec] p-5">
-              <input class="sr-only" type="radio" name="shipping" value="Envío estándar a regiones" data-cost="990">
-              <span class="flex items-start justify-between gap-4">
+            <label class="ship-option block cursor-pointer rounded-2xl border border-[#d7cfbf] bg-[#fbf5ec] p-5 transition-all">
+              <input class="sr-only shipping-radio" type="radio" name="shipping" value="Envío estándar a regiones" data-cost="990">
+              <span class="flex items-start justify-between gap-4 pointer-events-none">
                 <span>
                   <strong class="block text-base sm:text-lg font-bold text-[#17221d]">Envío estándar a regiones</strong>
                   <span class="mt-1 block text-xs sm:text-sm text-[#697168]">2 a 4 días hábiles a todo Chile</span>
                 </span>
-                <b class="text-[#b84264] font-bold text-base">$990</b>
+                <b class="text-[#b84264] font-bold text-base">+$990</b>
               </span>
             </label>
 

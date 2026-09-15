@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
   }
 
-  // 1. Cálculo y suma en tiempo real del costo de envío
+  // 1. Cálculo Dinámico de Envío y Total en Tiempo Real
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
   const summaryShippingText = document.getElementById('summaryShippingText');
+  const shippingCards = document.querySelectorAll('.ship-option');
   const shippingRadios = document.querySelectorAll('input[name="shipping"]');
 
   function actualizarTotalConEnvio() {
@@ -41,9 +42,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return { costoEnvio, totalFinal };
   }
 
+  // Listeners directos sobre los radios
   shippingRadios.forEach(radio => {
     radio.addEventListener('change', actualizarTotalConEnvio);
+    radio.addEventListener('input', actualizarTotalConEnvio);
   });
+
+  // Listeners en toda la tarjeta de la opción para asegurar activación inmediata en cualquier pantalla
+  shippingCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const radio = card.querySelector('input[type="radio"]');
+      if (radio && !radio.checked) {
+        radio.checked = true;
+        // Forzar disparo del evento change para Tailwind y estilos
+        radio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      actualizarTotalConEnvio();
+    });
+  });
+
+  // Ejecución inicial al renderizar
   actualizarTotalConEnvio();
 
   // 2. Autoformateador de Teléfono Chileno (9 1234 5678)
