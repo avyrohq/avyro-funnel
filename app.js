@@ -5,13 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';[cite: 6]
 
-  // Escala de precios
-  const PRECIOS_MAP = {
-    1: 14990,
-    2: 19990,
-    3: 29990,
-    4: 34990
-  };
+  // Valores de oferta fija
+  const PRODUCTO_NOMBRE = '2x Bálsamo hidratante VITALIS';
+  const CANTIDAD_FIJA = 2;
+  const TOTAL_FIJO = 19990;
 
   // 1. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
@@ -37,32 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Actualización de Total en Tiempo Real (Resuelto de forma síncrona y reactiva)
-  const cantidadSelect = document.getElementById('cantidad');
-  const summaryTotalAmount = document.getElementById('summaryTotalAmount');
+  // 2. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
+  const orderForm = document.getElementById('orderForm');
+  const submitBtn = document.getElementById('submitBtn');
 
   function formatoMoneda(valor) {
     return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
   }
-
-  function actualizarPrecioEnVivo() {
-    if (!cantidadSelect || !summaryTotalAmount) return;
-    const qty = parseInt(cantidadSelect.value, 10) || 2;
-    const precioFinal = PRECIOS_MAP[qty] || 19990;
-    summaryTotalAmount.textContent = formatoMoneda(precioFinal);
-  }
-
-  if (cantidadSelect) {
-    cantidadSelect.addEventListener('change', actualizarPrecioEnVivo);
-    cantidadSelect.addEventListener('input', actualizarPrecioEnVivo);
-    cantidadSelect.addEventListener('click', actualizarPrecioEnVivo);
-    // Ejecución inicial para garantizar que cargue con el valor seleccionado
-    actualizarPrecioEnVivo();
-  }
-
-  // 3. Envío Asíncrono a Google Sheets y Redirección a WhatsApp
-  const orderForm = document.getElementById('orderForm');
-  const submitBtn = document.getElementById('submitBtn');
 
   if (orderForm) {
     orderForm.addEventListener('submit', (e) => {
@@ -72,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.classList.add('loading');
         submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
       }
-
-      const qty = parseInt(document.getElementById('cantidad').value, 10) || 2;
-      const totalPagar = PRECIOS_MAP[qty] || 19990;
 
       // Limpieza de dígitos telefónicos
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
@@ -98,13 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = {
         nombre: (document.getElementById('nombre').value || '').trim(),
         telefono: telefonoSheet,
-        cantidad: qty,
-        total: totalPagar,
+        cantidad: CANTIDAD_FIJA,
+        total: TOTAL_FIJO,
         direccion: (document.getElementById('direccion').value || '').trim(),
         comuna: (document.getElementById('comuna').value || '').trim(),
         region: regionVal,
         envio: metodoEnvio,
-        producto: 'Bálsamo hidratante VITALIS',
+        producto: PRODUCTO_NOMBRE,
         fecha: new Date().toLocaleString('es-CL')
       };
 
@@ -139,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web de Coreanas (Avyro).\n\n` +
         `🌸 *Producto:* ${formData.producto}\n` +
-        `📦 *Cantidad:* ${formData.cantidad} unidad(es)\n` +
+        `📦 *Cantidad:* ${formData.cantidad} unidades (Pack Oferta)\n` +
         `🚚 *Método:* ${formData.envio}\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
