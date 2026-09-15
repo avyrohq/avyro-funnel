@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';
 
-  // Escala de precios por volumen con descuentos personalizados
+  // Escala de precios por volumen
   const PRECIOS_MAP = {
     1: 34990,
     2: 64990,
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Slider Dinámico de Reseñas (Atrás / Adelante / Dots)
-  const slides = document.querySelectorAll('.review-slide');
+  // 2. Slider de Reseñas
+  const slides = document.querySelectorAll('.review-card');
   const dots = document.querySelectorAll('.slider-dots .dot');
   const prevBtn = document.getElementById('prevReviewBtn');
   const nextBtn = document.getElementById('nextReviewBtn');
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Autoformateador de Teléfono (9 1234 5678)
+  // 3. Autoformateador de Teléfono Chileno (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -95,9 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Actualización dinámica del total según oferta
+  // 4. Actualización dinámica del total según cantidad
   const cantidadSelect = document.getElementById('cantidad');
   const summaryTotalAmount = document.getElementById('summaryTotalAmount');
+  const offerPriceHighlight = document.getElementById('offerPriceHighlight');
 
   function obtenerTotal(qty) {
     return PRECIOS_MAP[qty] || (qty * 34990);
@@ -110,11 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cantidadSelect && summaryTotalAmount) {
     cantidadSelect.addEventListener('change', (e) => {
       const qty = parseInt(e.target.value, 10) || 1;
-      summaryTotalAmount.textContent = formatoMoneda(obtenerTotal(qty));
+      const total = obtenerTotal(qty);
+      summaryTotalAmount.textContent = formatoMoneda(total);
+      if (offerPriceHighlight) {
+        offerPriceHighlight.textContent = '$' + total.toLocaleString('es-CL');
+      }
     });
   }
 
-  // 5. Manejo del Formulario COD y Redirección Garantizada
+  // 5. Envío y Redirección a WhatsApp
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -130,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
       const totalPagar = obtenerTotal(qty);
 
-      // Limpiar dígitos de teléfono
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -146,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const regionSelect = document.getElementById('region');
       const regionVal = regionSelect ? regionSelect.value : '';
 
+      const shippingSelected = document.querySelector('input[name="shipping_type"]:checked');
+      const metodoEnvio = shippingSelected ? shippingSelected.value : 'Envío estándar';
+
       const formData = {
         nombre: (document.getElementById('nombre').value || '').trim(),
         telefono: telefonoSheet,
@@ -154,11 +161,12 @@ document.addEventListener('DOMContentLoaded', () => {
         direccion: (document.getElementById('direccion').value || '').trim(),
         comuna: (document.getElementById('comuna').value || '').trim(),
         region: regionVal,
+        envio: metodoEnvio,
         producto: 'Taladro inalámbrico 48v',
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparar evento Lead en Meta Pixel
+      // Disparo de evento Lead en Meta Pixel
       if (typeof fbq !== 'undefined') {
         try {
           fbq('track', 'Lead', {
@@ -171,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Envío asíncrono en segundo plano a Google Sheets
+      // Envío asíncrono a Google Sheets
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
         try {
           fetch(APPS_SCRIPT_URL, {
@@ -179,17 +187,18 @@ document.addEventListener('DOMContentLoaded', () => {
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
-          }).catch(errFetch => console.warn('Fetch background error:', errFetch));
+          }).catch(errFetch => console.warn('Fetch error:', errFetch));
         } catch (errPost) {
-          console.warn('Error post sheets:', errPost);
+          console.warn('Error sheets:', errPost);
         }
       }
 
-      // Preparación del enlace de WhatsApp
+      // Enlace pre-armado hacia WhatsApp
       const mensajeConfirmacion = encodeURIComponent(
         `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
         `🛠️ *Producto:* ${formData.producto}\n` +
         `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
+        `🚚 *Método:* ${formData.envio}\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📞 *Teléfono:* ${telefonoWhatsApp}\n` +
@@ -199,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;
 
-      // Redirección con breve delay para asegurar la emisión de eventos
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 250);
