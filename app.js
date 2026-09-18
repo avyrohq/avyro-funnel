@@ -126,8 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
       summaryProductName.textContent = `${qty}x Kit Taladro 48V`;
     }
 
+    // Al asignar '' vacío hereda el display: flex nativo del CSS con justify-content: space-between
     if (bumpSummaryRow) {
-      bumpSummaryRow.style.display = incluyeGalletera ? 'flex' : 'none';
+      bumpSummaryRow.style.display = incluyeGalletera ? '' : 'none';
     }
 
     if (summaryTotalAmount) {

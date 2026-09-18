@@ -670,15 +670,30 @@ h1 {
   margin-bottom: 22px;
 }
 
+/* Alineación limpia del Resumen y Order Bump */
 .summary-row {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
   font-size: 0.88rem;
   margin-bottom: 8px;
 }
 
+.summary-row > span {
+  flex-shrink: 0;
+}
+
+.summary-row strong {
+  text-align: right;
+  word-break: break-word;
+}
+
 .text-bump {
   color: var(--primary-blue);
+  text-align: right;
+  display: block;
+  line-height: 1.35;
 }
 
 .total-row {
