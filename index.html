@@ -330,7 +330,7 @@
         </div>
     </section>
 
-    <!-- Formulario COD -->
+    <!-- Formulario COD con Order Bump -->
     <section class="order-section" id="pedido">
         <div class="container">
             <div class="order-card">
@@ -343,8 +343,12 @@
                 <div class="order-body">
                     <div class="summary-box">
                         <div class="summary-row">
-                            <span>Producto:</span>
-                            <strong id="summaryProductName">Taladro inalámbrico 48v</strong>
+                            <span>Producto principal:</span>
+                            <strong id="summaryProductName">1x Kit Taladro 48V</strong>
+                        </div>
+                        <div class="summary-row" id="bumpSummaryRow" style="display: none;">
+                            <span>Complemento:</span>
+                            <strong class="text-bump">+ 1x Mini Galletera 12V ($24.990)</strong>
                         </div>
                         <div class="summary-row">
                             <span>Despacho:</span>
@@ -373,7 +377,7 @@
 
                         <!-- Selector hasta 4 Kits -->
                         <div class="form-group">
-                            <label for="cantidad">Cantidad y Oferta *</label>
+                            <label for="cantidad">Cantidad y Oferta Taladro *</label>
                             <select id="cantidad" name="cantidad">
                                 <option value="1">1 Kit Completo — $34.990 CLP</option>
                                 <option value="2">2 Kits Completos — $64.990 CLP (Ahorras $5.000)</option>
@@ -418,8 +422,27 @@
                             </div>
                         </div>
 
+                        <!-- Recuadro Order Bump Mini Galletera -->
+                        <div class="order-bump-card" id="orderBumpContainer">
+                            <div class="bump-header-badge">
+                                <span>⚡ OFERTA EXCLUSIVA DE ESTE PEDIDO (AHORRAS $15.000)</span>
+                            </div>
+                            <label class="bump-checkbox-label" for="addGalletera">
+                                <input type="checkbox" id="addGalletera" name="addGalletera">
+                                <span class="bump-label-text">
+                                    <strong>¡SÍ, AGREGAR MINI GALLETERA POR +$24.990!</strong>
+                                    <span class="bump-strike">Normal: $39.990</span>
+                                </span>
+                            </label>
+                            <div class="bump-content">
+                                <p class="bump-description">
+                                    <strong>Kit Mini Amoladora Angular 12V Brushless (500W):</strong> 19.500 RPM sin sobrecalentamiento. Incluye <strong>2 baterías de litio de 2.000 mAh</strong>, cargador rápido, 2 discos diamantados y llave de apriete. Corta PVC, cerámica, madera y metal sin cables.
+                                </p>
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn-submit" id="submitBtn">
-                            <span>CONFIRMAR PEDIDO Y PAGAR AL RECIBIR</span>
+                            <span id="submitBtnText">CONFIRMAR PEDIDO Y PAGAR AL RECIBIR</span>
                             <i data-lucide="check-circle"></i>
                         </button>
 
@@ -464,7 +487,7 @@
                         <i data-lucide="chevron-down"></i>
                     </button>
                     <div class="accordion-content">
-                        <p>El kit incluye <strong>2 baterías de litio en total</strong>. Una viene instalada en la herramienta y la otra queda en el maletín como repuesto recargable para que no detengas tu trabajo.</p>
+                        <p>El kit de taladro incluye <strong>2 baterías de litio en total</strong>. Si agregas la oferta de la mini galletera, esta también incluye <strong>sus propias 2 baterías de 12V</strong> de respaldo.</p>
                     </div>
                 </div>
 
@@ -474,7 +497,7 @@
                         <i data-lucide="chevron-down"></i>
                     </button>
                     <div class="accordion-content">
-                        <p>Todos los productos Avyro cuentan con 30 días de garantía directa por cualquier falla técnica o de fabricación. Si presentas algún inconveniente, gestionamos la solución de inmediato.</p>
+                        <p>Todos los productos Avyro cuentan con garantía directa ante fallas técnicas o de fabricación. Si presentas algún inconveniente al recibir, gestionamos la solución de inmediato.</p>
                     </div>
                 </div>
             </div>
@@ -491,7 +514,7 @@
                 <p class="footer-about">Herramientas de alta durabilidad y tecnología pensada para el hogar y taller. Garantía, calidad y despacho con pago contra entrega en todo Chile.</p>
                 <div class="footer-badges">
                     <span>🇨🇱 Cobertura Nacional</span>
-                    <span>🛡️ Garantía Avyro 30 Días</span>
+                    <span>🛡️ Garantía Avyro</span>
                 </div>
             </div>
 
