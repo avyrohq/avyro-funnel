@@ -1,70 +1,77 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Tu URL de Google Apps Script (/exec)
+  // URL de tu Google Apps Script (/exec)
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec';
   
   // Tu número de WhatsApp receptor
   const WHATSAPP_NUMERO = '56922241846';
 
-  // Valores base de la oferta
-  const PRODUCTO_NOMBRE = '2x Bálsamo hidratante VITALIS';
-  const CANTIDAD_FIJA = 2;
-  const PRECIO_BASE = 19990;
+  // Escala de precios por volumen con descuentos personalizados
+  const PRECIOS_MAP = {
+    1: 34990,
+    2: 64990,
+    3: 89990,
+    4: 109990
+  };
 
-  function formatoMoneda(valor) {
-    return '$' + Number(valor).toLocaleString('es-CL') + ' CLP';
-  }
+  // 1. Acordeón FAQ
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      const isOpen = item.classList.contains('active');
 
-  // ========================================================
-  // 1. Cálculo Dinámico de Envío (Suma Garantizada)
-  // ========================================================
-  const summaryTotalAmount = document.getElementById('summaryTotalAmount');
-  const summaryShippingText = document.getElementById('summaryShippingText');
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('active'));
 
-  function recalcularTotal() {
-    // Buscar la opción de envío actualmente marcada
-    const radioSeleccionado = document.querySelector('input[name="shipping"]:checked');
-    
-    let costoEnvio = 0;
-    if (radioSeleccionado) {
-      // Leemos directamente el atributo data-cost o evaluamos por texto
-      const costAttr = radioSeleccionado.getAttribute('data-cost');
-      costoEnvio = costAttr !== null ? parseInt(costAttr, 10) : (radioSeleccionado.value.includes('990') ? 990 : 0);
-    }
-
-    const totalFinal = PRECIO_BASE + costoEnvio;
-
-    // Actualizar el texto del total en pantalla
-    if (summaryTotalAmount) {
-      summaryTotalAmount.textContent = formatoMoneda(totalFinal);
-    }
-
-    // Actualizar el texto del costo de envío en pantalla
-    if (summaryShippingText) {
-      if (costoEnvio === 0) {
-        summaryShippingText.textContent = 'GRATIS';
-        summaryShippingText.className = 'text-green-700 font-bold';
-      } else {
-        summaryShippingText.textContent = '+$990 CLP';
-        summaryShippingText.className = 'text-[#b84264] font-bold';
+      if (!isOpen) {
+        item.classList.add('active');
       }
-    }
-
-    return { costoEnvio, totalFinal };
-  }
-
-  // Escuchar cualquier cambio en los radios de envío a nivel global
-  document.addEventListener('change', (e) => {
-    if (e.target && e.target.name === 'shipping') {
-      recalcularTotal();
-    }
+    });
   });
 
-  // Ejecución inmediata al cargar la página
-  recalcularTotal();
+  // 2. Slider Dinámico de Reseñas (Atrás / Adelante / Dots)
+  const slides = document.querySelectorAll('.review-slide');
+  const dots = document.querySelectorAll('.slider-dots .dot');
+  const prevBtn = document.getElementById('prevReviewBtn');
+  const nextBtn = document.getElementById('nextReviewBtn');
+  let currentSlide = 0;
 
-  // ========================================================
-  // 2. Autoformateador de Teléfono Chileno (9 1234 5678)
-  // ========================================================
+  function showSlide(index) {
+    if (slides.length === 0) return;
+
+    if (index >= slides.length) {
+      currentSlide = 0;
+    } else if (index < 0) {
+      currentSlide = slides.length - 1;
+    } else {
+      currentSlide = index;
+    }
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const targetIndex = parseInt(e.target.getAttribute('data-index'), 10);
+        showSlide(targetIndex);
+      });
+    });
+
+    setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 7000);
+  }
+
+  // 3. Autoformateador de Teléfono (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -88,9 +95,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ========================================================
-  // 3. Envío Asíncrono a Google Sheets y WhatsApp
-  // ========================================================
+  // 4. Actualización dinámica del total según oferta
+  const cantidadSelect = document.getElementById('cantidad');
+  const summaryTotalAmount = document.getElementById('summaryTotalAmount');
+
+  function obtenerTotal(qty) {
+    return PRECIOS_MAP[qty] || (qty * 34990);
+  }
+
+  function formatoMoneda(valor) {
+    return '$' + valor.toLocaleString('es-CL') + ' CLP';
+  }
+
+  if (cantidadSelect && summaryTotalAmount) {
+    cantidadSelect.addEventListener('change', (e) => {
+      const qty = parseInt(e.target.value, 10) || 1;
+      summaryTotalAmount.textContent = formatoMoneda(obtenerTotal(qty));
+    });
+  }
+
+  // 5. Manejo del Formulario COD y Redirección Garantizada
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -103,9 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
       }
 
-      const { costoEnvio, totalFinal } = recalcularTotal();
+      const qty = parseInt(document.getElementById('cantidad').value, 10) || 1;
+      const totalPagar = obtenerTotal(qty);
 
-      // Limpieza de teléfono
+      // Limpiar dígitos de teléfono
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -121,23 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const regionSelect = document.getElementById('region');
       const regionVal = regionSelect ? regionSelect.value : '';
 
-      const shippingSelected = document.querySelector('input[name="shipping"]:checked');
-      const metodoEnvio = shippingSelected ? shippingSelected.value : 'Envío estándar a regiones';
-
       const formData = {
         nombre: (document.getElementById('nombre').value || '').trim(),
         telefono: telefonoSheet,
-        cantidad: CANTIDAD_FIJA,
-        total: totalFinal,
+        cantidad: qty,
+        total: totalPagar,
         direccion: (document.getElementById('direccion').value || '').trim(),
         comuna: (document.getElementById('comuna').value || '').trim(),
         region: regionVal,
-        envio: metodoEnvio,
-        producto: PRODUCTO_NOMBRE,
+        producto: 'Taladro inalámbrico 48v',
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparo Lead Meta Pixel
+      // Disparar evento Lead en Meta Pixel
       if (typeof fbq !== 'undefined') {
         try {
           fbq('track', 'Lead', {
@@ -146,11 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
             currency: 'CLP'
           });
         } catch (errPixel) {
-          console.warn('Pixel error:', errPixel);
+          console.warn('Pixel err:', errPixel);
         }
       }
 
-      // Envío asíncrono a Google Sheets
+      // Envío asíncrono en segundo plano a Google Sheets
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
         try {
           fetch(APPS_SCRIPT_URL, {
@@ -158,27 +179,27 @@ document.addEventListener('DOMContentLoaded', () => {
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
-          }).catch(errFetch => console.warn('Fetch error:', errFetch));
+          }).catch(errFetch => console.warn('Fetch background error:', errFetch));
         } catch (errPost) {
           console.warn('Error post sheets:', errPost);
         }
       }
 
-      // Mensaje estructurado hacia WhatsApp
+      // Preparación del enlace de WhatsApp
       const mensajeConfirmacion = encodeURIComponent(
-        `¡Hola! Acabo de registrar mi pedido en la web de Coreanas (Avyro).\n\n` +
-        `🌸 *Producto:* ${formData.producto}\n` +
-        `📦 *Cantidad:* ${formData.cantidad} unidades (Pack Oferta)\n` +
-        `🚚 *Método:* ${formData.envio} (${costoEnvio === 0 ? 'Gratis' : '$990'})\n` +
+        `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
+        `🛠️ *Producto:* ${formData.producto}\n` +
+        `📦 *Cantidad:* ${formData.cantidad} kit(s)\n` +
         `💰 *Total a pagar:* ${formatoMoneda(formData.total)}\n` +
         `👤 *Nombre:* ${formData.nombre}\n` +
         `📞 *Teléfono:* ${telefonoWhatsApp}\n` +
         `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
-        `Confirmo que pagaré al repartidor al recibir en mi domicilio (Efectivo, Tarjeta o Transferencia bancaria).`
+        `Confirmo que pagaré al repartidor al recibir (Efectivo, Tarjeta o Transferencia).`
       );
 
       const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;
 
+      // Redirección con breve delay para asegurar la emisión de eventos
       setTimeout(() => {
         window.location.href = targetUrl;
       }, 250);
