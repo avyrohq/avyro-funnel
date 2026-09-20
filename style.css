@@ -730,6 +730,56 @@ h1 {
   gap: 12px;
 }
 
+/* Bloque de Tarjetas de Tiempo de Despacho */
+.shipping-times-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 4px 0 6px 0;
+}
+
+.shipping-time-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.shipping-time-card .st-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.shipping-time-card .st-header svg {
+  width: 15px;
+  height: 15px;
+  color: var(--primary-blue);
+}
+
+.shipping-time-card .st-header span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  letter-spacing: 0.04em;
+}
+
+.shipping-time-card strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--primary-navy);
+  margin-bottom: 2px;
+}
+
+.shipping-time-card p {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  line-height: 1.3;
+  margin: 0;
+}
+
 label {
   font-size: 0.85rem;
   font-weight: 700;
@@ -1079,7 +1129,7 @@ select:disabled {
   color: #64748b;
 }
 
-/* Estilos de la Pantalla de Gracias (gracias.html) */
+/* Pantalla de Gracias (gracias.html) */
 .thankyou-section {
   padding: 50px 0 70px 0;
   display: flex;
@@ -1130,38 +1180,48 @@ select:disabled {
   line-height: 1.5;
 }
 
+/* Rediseño Fluido y Responsive del Aviso de WhatsApp */
 .whatsapp-notice-box {
   background-color: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  border-radius: 12px;
-  padding: 16px 20px;
+  border: 1.5px solid #86efac;
+  border-radius: 14px;
+  padding: 18px 20px;
   margin-bottom: 25px;
   text-align: left;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.06);
 }
 
 .whatsapp-notice-box svg {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   color: var(--accent-green);
   flex-shrink: 0;
   margin-top: 2px;
 }
 
+.wn-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .whatsapp-notice-box strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: var(--primary-navy);
-  margin-bottom: 3px;
+  margin-bottom: 5px;
+  font-weight: 800;
 }
 
 .whatsapp-notice-box p {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
   margin: 0;
+  word-break: normal;
+  white-space: normal;
 }
 
 .thankyou-details-box {
@@ -1237,6 +1297,11 @@ select:disabled {
     width: 100%;
   }
 
+  .shipping-times-wrapper {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .form-row-2 {
     grid-template-columns: 1fr;
   }
@@ -1269,10 +1334,28 @@ select:disabled {
   }
 
   .thankyou-card {
-    padding: 25px 20px;
+    padding: 25px 18px;
   }
 
   .thankyou-title {
     font-size: 1.55rem;
+  }
+
+  .whatsapp-notice-box {
+    padding: 15px 14px;
+    gap: 10px;
+  }
+
+  .whatsapp-notice-box svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .whatsapp-notice-box strong {
+    font-size: 0.92rem;
+  }
+
+  .whatsapp-notice-box p {
+    font-size: 0.83rem;
   }
 }

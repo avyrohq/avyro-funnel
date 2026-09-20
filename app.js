@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Acordeón FAQ[cite: 18]
+  // 2. Acordeón FAQ[cite: 20]
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Slider Dinámico de Reseñas[cite: 18]
+  // 3. Slider Dinámico de Reseñas[cite: 20]
   const slides = document.querySelectorAll('.review-slide');
   const dots = document.querySelectorAll('.slider-dots .dot');
   const prevBtn = document.getElementById('prevReviewBtn');
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 4. Autoformateador de Teléfono (9 1234 5678)[cite: 18]
+  // 4. Autoformateador de Teléfono (9 1234 5678)[cite: 20]
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Actualización dinámica del total según cantidad y Order Bump[cite: 18]
+  // 5. Actualización dinámica del total según cantidad y Order Bump[cite: 20]
   const cantidadSelect = document.getElementById('cantidad');
   const addGalleteraCheckbox = document.getElementById('addGalletera');
   const summaryProductName = document.getElementById('summaryProductName');
