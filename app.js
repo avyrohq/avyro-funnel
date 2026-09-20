@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // URL de tu Google Apps Script (/exec)
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwf_OW_CVfadz36hQ26wwchCKuZm2XLNcM2WlYCAr3Tx3l0l5JisCJ8fuhH2JDDDo2Vtg/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwI7Poorl2u43rg1dRsSSlRau4U8X2yc95M8sPvakfiAFx6DYOTmtT1Iwj9qj_LhKVqSg/exec';
 
   // Precios del Taladro por cantidad
   const PRECIOS_MAP = {
