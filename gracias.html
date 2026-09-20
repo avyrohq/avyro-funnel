@@ -68,9 +68,9 @@
                     </div>
                 </div>
 
-                <!-- Desglose Dinámico de la Orden -->
+                <!-- Desglose Dinámico Detallado de la Orden -->
                 <div class="thankyou-details-box">
-                    <h3>Resumen de tu compra</h3>
+                    <h3>Resumen detallado de tu compra</h3>
                     <div class="thankyou-row">
                         <span>Cliente:</span>
                         <strong id="tyNombre">Cargando...</strong>
@@ -80,8 +80,16 @@
                         <strong id="tyTelefono">Cargando...</strong>
                     </div>
                     <div class="thankyou-row">
-                        <span>Destino:</span>
+                        <span>Destino (Comuna/Región):</span>
                         <strong id="tyDestino">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row">
+                        <span>Dirección de entrega:</span>
+                        <strong id="tyDireccion">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row">
+                        <span>Tiempo estimado de despacho:</span>
+                        <strong id="tyPlazo">Cargando...</strong>
                     </div>
                     <div class="thankyou-row">
                         <span>Producto:</span>
@@ -110,7 +118,7 @@
     <script>
       lucide.createIcons();
 
-      // Recuperar datos de la orden y disparar Meta Pixel Purchase
+      // Recuperar datos completos de la orden y disparar Meta Pixel Purchase
       document.addEventListener('DOMContentLoaded', () => {
         const orderDataRaw = sessionStorage.getItem('avyro_last_order');
         if (orderDataRaw) {
@@ -120,6 +128,14 @@
             document.getElementById('tyNombre').textContent = data.nombre || 'Registrado';
             document.getElementById('tyTelefono').textContent = data.telefono || 'Registrado';
             document.getElementById('tyDestino').textContent = `${data.comuna}, ${data.region}`;
+            document.getElementById('tyDireccion').textContent = data.direccion || 'Dirección registrada';
+
+            // Tiempo aproximado según región
+            const esRM = data.region === 'Metropolitana';
+            document.getElementById('tyPlazo').textContent = esRM 
+              ? 'Aprox. 24 a 48 hrs hábiles' 
+              : 'Aprox. 2 a 4 días hábiles';
+
             document.getElementById('tyProducto').textContent = data.producto;
             document.getElementById('tyTotal').textContent = '$' + Number(data.total).toLocaleString('es-CL') + ' CLP';
 
