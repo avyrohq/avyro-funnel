@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Pedido Confirmado! | Avyro Chile</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+
+    <!-- Fuentes & Iconos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1115731150795376');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1115731150795376&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-container">
+            <a href="index.html" class="header-logo">
+                <img src="assets/logo-avyro.png" alt="Avyro" class="brand-logo-img">
+            </a>
+            <div class="header-right">
+                <span class="header-badge"><i data-lucide="shield-check"></i> Tienda Oficial</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="thankyou-section">
+        <div class="container">
+            <div class="thankyou-card">
+                <div class="thankyou-icon">
+                    <i data-lucide="check-circle-2"></i>
+                </div>
+                
+                <h1 class="thankyou-title">¡Pedido Recibido con Éxito!</h1>
+                <p class="thankyou-desc">
+                    Hemos registrado tu solicitud de despacho. Recuerda que no tienes que pagar nada por adelantado: <strong>pagas en efectivo, tarjeta o transferencia al recibir en tu puerta</strong>.
+                </p>
+
+                <!-- Aviso Estratégico de WhatsApp -->
+                <div class="whatsapp-notice-box">
+                    <i data-lucide="message-circle"></i>
+                    <div>
+                        <strong>Paso siguiente: Validación de Dirección</strong>
+                        <p>Nuestro equipo de logística te contactará por <strong>WhatsApp en breve</strong> para validar tu dirección y coordinar la entrega antes de despachar.</p>
+                    </div>
+                </div>
+
+                <!-- Desglose Dinámico de la Orden -->
+                <div class="thankyou-details-box">
+                    <h3>Resumen de tu compra</h3>
+                    <div class="thankyou-row">
+                        <span>Cliente:</span>
+                        <strong id="tyNombre">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row">
+                        <span>Teléfono:</span>
+                        <strong id="tyTelefono">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row">
+                        <span>Destino:</span>
+                        <strong id="tyDestino">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row">
+                        <span>Producto:</span>
+                        <strong id="tyProducto">Cargando...</strong>
+                    </div>
+                    <div class="thankyou-row thankyou-total-row">
+                        <span>Total a pagar al repartidor:</span>
+                        <strong id="tyTotal">$34.990 CLP</strong>
+                    </div>
+                </div>
+
+                <a href="index.html" class="cta-button" style="width: 100%;">
+                    <span>Volver a la tienda</span>
+                    <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" style="padding: 25px 0;">
+        <div class="container text-center">
+            <p style="font-size: 0.8rem; color: #64748b;">&copy; 2026 Avyro Chile (tienda.avyro.cl). Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+      lucide.createIcons();
+
+      // Recuperar datos de la orden y disparar Meta Pixel Purchase
+      document.addEventListener('DOMContentLoaded', () => {
+        const orderDataRaw = sessionStorage.getItem('avyro_last_order');
+        if (orderDataRaw) {
+          try {
+            const data = JSON.parse(orderDataRaw);
+            
+            document.getElementById('tyNombre').textContent = data.nombre || 'Registrado';
+            document.getElementById('tyTelefono').textContent = data.telefono || 'Registrado';
+            document.getElementById('tyDestino').textContent = `${data.comuna}, ${data.region}`;
+            document.getElementById('tyProducto').textContent = data.producto;
+            document.getElementById('tyTotal').textContent = '$' + Number(data.total).toLocaleString('es-CL') + ' CLP';
+
+            // Evento Purchase oficial para Meta Ads con el valor real
+            if (typeof fbq !== 'undefined') {
+              fbq('track', 'Purchase', {
+                content_name: data.producto,
+                value: data.total,
+                currency: 'CLP'
+              });
+            }
+          } catch(e) {
+            console.warn('Error leyendo sessionStorage:', e);
+          }
+        }
+      });
+    </script>
+</body>
+</html>

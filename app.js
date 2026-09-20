@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // URL de tu Google Apps Script (/exec)
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec';
-  
-  // Tu número de WhatsApp receptor
-  const WHATSAPP_NUMERO = '56922241846';
 
   // Precios del Taladro por cantidad
   const PRECIOS_MAP = {
@@ -16,7 +13,48 @@ document.addEventListener('DOMContentLoaded', () => {
   // Precio de la Galletera en Order Bump
   const PRECIO_GALLETERA = 24990;
 
-  // 1. Acordeón FAQ
+  // Listado oficial de comunas de Chile por región
+  const COMUNAS_POR_REGION = {
+    "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
+    "Tarapacá": ["Iquique", "Alto Hospicio", "Pozo Almonte", "Camiña", "Colchane", "Huara", "Pica"],
+    "Antofagasta": ["Antofagasta", "Mejillones", "Sierra Gorda", "Taltal", "Calama", "Ollagüe", "San Pedro de Atacama", "Tocopilla", "María Elena"],
+    "Atacama": ["Copiapó", "Caldera", "Tierra Amarilla", "Chañaral", "Diego de Almagro", "Vallenar", "Alto del Carmen", "Freirina", "Huasco"],
+    "Coquimbo": ["La Serena", "Coquimbo", "Andacollo", "La Higuera", "Paiguano", "Vicuña", "Illapel", "Canela", "Los Vilos", "Salamanca", "Ovalle", "Combarbalá", "Monte Patria", "Punitaqui", "Río Hurtado"],
+    "Valparaíso": ["Valparaíso", "Casablanca", "Concón", "Juan Fernández", "Puchuncaví", "Quintero", "Viña del Mar", "Isla de Pascua", "Los Andes", "Calle Larga", "Rinconada", "San Esteban", "La Ligua", "Cabildo", "Papudo", "Petorca", "Zapallar", "Quillota", "Calera", "Hijuelas", "La Cruz", "Nogales", "San Antonio", "Algarrobo", "Cartagena", "El Quisco", "El Tabo", "Santo Domingo", "San Felipe", "Catemu", "Llaillay", "Panquehue", "Putaendo", "Santa María", "Quilpué", "Limache", "Olmué", "Villa Alemana"],
+    "Metropolitana": ["Santiago", "Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechurba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura", "Puente Alto", "Pirque", "San José de Maipo", "Colina", "Lampa", "Tiltil", "San Bernardo", "Buin", "Calera de Tango", "Paine", "Melipilla", "Alhué", "Curacaví", "María Pinto", "San Pedro", "Talagante", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor"],
+    "O'Higgins": ["Rancagua", "Codegua", "Coinco", "Coltauco", "Doñihue", "Graneros", "Las Cabras", "Machalí", "Malloa", "Mostazal", "Olivar", "Peumo", "Pichidegua", "Quinta de Tilcoco", "Rengo", "Requínoa", "San Vicente", "Pichilemu", "La Estrella", "Litueche", "Marchihue", "Navidad", "Paredones", "San Fernando", "Chépica", "Chimbarongo", "Lolol", "Nancagua", "Palmilla", "Peralillo", "Placilla", "Pumanque", "Santa Cruz"],
+    "Maule": ["Talca", "Constitución", "Curepto", "Empedrado", "Maule", "Pelarco", "Pencahue", "Río Claro", "San Clemente", "San Rafael", "Cauquenes", "Chanco", "Pelluhue", "Curicó", "Hualañé", "Licantén", "Molina", "Rauco", "Romeral", "Sagrada Familia", "Teno", "Vichuquén", "Linares", "Colbún", "Longaví", "Parral", "Retiro", "San Javier", "Villa Alegre", "Yerbas Buenas"],
+    "Ñuble": ["Chillán", "Bulnes", "Cobquecura", "Coelemu", "Coihueco", "Chillán Viejo", "El Carmen", "Ninhue", "Ñiquén", "Pemuco", "Pinto", "Portezuelo", "Quillón", "Quirihue", "Ránquil", "San Carlos", "San Fabián", "San Ignacio", "San Nicolás", "Treguaco", "Yungay"],
+    "Biobío": ["Concepción", "Coronel", "Chiguayante", "Florida", "Hualqui", "Lota", "Penco", "San Pedro de la Paz", "Santa Juana", "Talcahuano", "Tomé", "Hualpén", "Lebu", "Arauco", "Cañete", "Contulmo", "Curanilahue", "Los Álamos", "Tirúa", "Los Ángeles", "Antuco", "Cabrero", "Laja", "Mulchén", "Nacimiento", "Negrete", "Quilaco", "Quilleco", "San Rosendo", "Santa Bárbara", "Tucapel", "Yumbel", "Alto Biobío"],
+    "La Araucanía": ["Temuco", "Carahue", "Cunco", "Curarrehue", "Freire", "Galvarino", "Gorbea", "Lautaro", "Loncoche", "Melipeuco", "Nueva Imperial", "Padre Las Casas", "Perquenco", "Pitrufquén", "Pucón", "Saavedra", "Teodoro Schmidt", "Toltén", "Vilcún", "Villarrica", "Cholchol", "Angol", "Collipulli", "Curacautín", "Ercilla", "Lonquimay", "Los Sauces", "Lumaco", "Purén", "Renaico", "Traiguén", "Victoria"],
+    "Los Ríos": ["Valdivia", "Corral", "Lanco", "Los Lagos", "Máfil", "Mariquina", "Paillaco", "Panguipulli", "La Unión", "Futrono", "Lago Ranco", "Río Bueno"],
+    "Los Lagos": ["Puerto Montt", "Calbuco", "Cochamó", "Fresia", "Frutillar", "Los Muermos", "Llanquihue", "Maullín", "Puerto Varas", "Castro", "Ancud", "Chonchi", "Curaco de Vélez", "Dalcahue", "Puqueldón", "Queilén", "Quellón", "Quemchi", "Quinchao", "Osorno", "Puerto Octay", "Purranque", "Puyehue", "Río Negro", "San Juan de la Costa", "San Pablo", "Chaitén", "Futaleufú", "Hualaihué", "Palena"],
+    "Aysén": ["Coyhaique", "Lago Verde", "Aysén", "Cisnes", "Guaitecas", "Cochrane", "O'Higgins", "Tortel", "Chile Chico", "Río Ibáñez"],
+    "Magallanes": ["Punta Arenas", "Laguna Blanca", "Río Verde", "San Gregorio", "Cabo de Hornos", "Antártica", "Porvenir", "Primavera", "Timaukel", "Natales", "Torres del Paine"]
+  };
+
+  // 1. Selector Dinámico de Comunas según Región
+  const regionSelect = document.getElementById('region');
+  const comunaSelect = document.getElementById('comuna');
+
+  if (regionSelect && comunaSelect) {
+    regionSelect.addEventListener('change', () => {
+      const regionElegida = regionSelect.value;
+      const comunas = COMUNAS_POR_REGION[regionElegida] || [];
+
+      comunaSelect.innerHTML = '<option value="" disabled selected>Selecciona tu comuna</option>';
+      comunas.forEach(comuna => {
+        const opt = document.createElement('option');
+        opt.value = comuna;
+        opt.textContent = comuna;
+        comunaSelect.appendChild(opt);
+      });
+
+      comunaSelect.disabled = false;
+    });
+  }
+
+  // 2. Acordeón FAQ
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -31,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Slider Dinámico de Reseñas
+  // 3. Slider Dinámico de Reseñas
   const slides = document.querySelectorAll('.review-slide');
   const dots = document.querySelectorAll('.slider-dots .dot');
   const prevBtn = document.getElementById('prevReviewBtn');
@@ -74,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 3. Autoformateador de Teléfono (9 1234 5678)
+  // 4. Autoformateador de Teléfono (9 1234 5678)
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -98,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Actualización dinámica del total según cantidad y Order Bump
+  // 5. Actualización dinámica del total según cantidad y Order Bump
   const cantidadSelect = document.getElementById('cantidad');
   const addGalleteraCheckbox = document.getElementById('addGalletera');
   const summaryProductName = document.getElementById('summaryProductName');
@@ -121,12 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
       totalPagar += PRECIO_GALLETERA;
     }
 
-    // Actualizar Resumen en Formulario
     if (summaryProductName) {
       summaryProductName.textContent = `${qty}x Kit Taladro 48V`;
     }
 
-    // Al asignar '' vacío hereda el display: flex nativo del CSS con justify-content: space-between
     if (bumpSummaryRow) {
       bumpSummaryRow.style.display = incluyeGalletera ? '' : 'none';
     }
@@ -158,10 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
     addGalleteraCheckbox.addEventListener('change', calcularTotales);
   }
 
-  // Ejecución inicial
   calcularTotales();
 
-  // 5. Manejo del Formulario COD y Redirección a WhatsApp
+  // 6. Envío en segundo plano a Google Sheets y Redirección a Gracias (Cero WhatsApp)
   const orderForm = document.getElementById('orderForm');
   const submitBtn = document.getElementById('submitBtn');
 
@@ -171,12 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (submitBtn) {
         submitBtn.classList.add('loading');
-        submitBtn.innerHTML = '<span>Redirigiendo a WhatsApp...</span>';
+        submitBtn.innerHTML = '<span>Registrando pedido seguro...</span>';
       }
 
       const { qty, incluyeGalletera, totalPagar } = calcularTotales();
 
-      // Limpiar dígitos de teléfono
+      // Formatear teléfono a 9 dígitos estrictos
       let digitos = (document.getElementById('telefono').value || '').replace(/\D/g, '');
       if (digitos.startsWith('56')) {
         digitos = digitos.substring(2);
@@ -186,78 +221,50 @@ document.addEventListener('DOMContentLoaded', () => {
         digitos = '9' + digitos;
       }
 
-      const telefonoSheet = "'+56" + digitos;
-      const telefonoWhatsApp = "+56" + digitos;
-
-      const regionSelect = document.getElementById('region');
+      const telefonoLimpio = '+56' + digitos;
+      const calleNumeroVal = (document.getElementById('calle_numero').value || '').trim();
+      const referenciaVal = (document.getElementById('referencia').value || '').trim();
       const regionVal = regionSelect ? regionSelect.value : '';
+      const comunaVal = comunaSelect ? comunaSelect.value : '';
 
-      // Descripción limpia para Google Sheets
+      const direccionCompleta = referenciaVal ? `${calleNumeroVal} (${referenciaVal})` : calleNumeroVal;
+
       const productoFinal = incluyeGalletera 
         ? `${qty}x Taladro 48V + 1x Mini Galletera 12V (Combo)` 
         : `${qty}x Taladro inalámbrico 48v`;
 
       const formData = {
         nombre: (document.getElementById('nombre').value || '').trim(),
-        telefono: telefonoSheet,
+        telefono: telefonoLimpio,
         cantidad: qty,
-        galletera: incluyeGalletera ? 'SÍ (+1 Galletera 12V)' : 'NO',
+        galletera: incluyeGalletera ? 'SÍ' : 'NO',
         total: totalPagar,
-        direccion: (document.getElementById('direccion').value || '').trim(),
-        comuna: (document.getElementById('comuna').value || '').trim(),
         region: regionVal,
+        comuna: comunaVal,
+        calle_numero: calleNumeroVal,
+        referencia: referenciaVal,
+        direccion: direccionCompleta,
         producto: productoFinal,
         fecha: new Date().toLocaleString('es-CL')
       };
 
-      // Disparar evento Lead en Meta Pixel
-      if (typeof fbq !== 'undefined') {
-        try {
-          fbq('track', 'Lead', {
-            content_name: formData.producto,
-            value: formData.total,
-            currency: 'CLP'
-          });
-        } catch (errPixel) {
-          console.warn('Pixel err:', errPixel);
-        }
-      }
+      // Guardar resumen en sessionStorage para mostrarlo en gracias.html
+      sessionStorage.setItem('avyro_last_order', JSON.stringify(formData));
 
-      // Envío asíncrono a Google Sheets
+      // Envío asíncrono a Google Sheets sin bloquear la navegación
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
-        try {
-          fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-          }).catch(errFetch => console.warn('Fetch error:', errFetch));
-        } catch (errPost) {
-          console.warn('Error post sheets:', errPost);
-        }
+        fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        }).catch(errFetch => console.warn('Fetch error:', errFetch));
       }
 
-      // Preparación del mensaje de WhatsApp
-      let detalleProductos = `🛠️ *Producto Principal:* ${qty}x Kit Taladro Inalámbrico 48V\n`;
-      if (incluyeGalletera) {
-        detalleProductos += `⚡ *Complemento Agregado:* 1x Mini Galletera Inalámbrica 12V Brushless (+$24.990)\n`;
-      }
-
-      const mensajeConfirmacion = encodeURIComponent(
-        `¡Hola! Acabo de registrar mi pedido en la web de Avyro.\n\n` +
-        detalleProductos +
-        `💰 *Total a pagar al recibir:* ${formatoMoneda(formData.total)}\n` +
-        `👤 *Nombre:* ${formData.nombre}\n` +
-        `📞 *Teléfono:* ${telefonoWhatsApp}\n` +
-        `📍 *Dirección:* ${formData.direccion}, ${formData.comuna} (${formData.region})\n\n` +
-        `Confirmo que pagaré al repartidor al recibir el paquete (Efectivo, Tarjeta o Transferencia).`
-      );
-
-      const targetUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${mensajeConfirmacion}`;
-
+      // Redirección directa a la pantalla de agradecimiento
       setTimeout(() => {
-        window.location.href = targetUrl;
-      }, 250);
+        window.location.href = 'gracias.html';
+      }, 400);
     });
   }
 });

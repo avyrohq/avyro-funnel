@@ -330,7 +330,7 @@
         </div>
     </section>
 
-    <!-- Formulario COD con Order Bump (Con Imagen) -->
+    <!-- Formulario COD con Orden Geográfico y Comunas Dinámicas -->
     <section class="order-section" id="pedido">
         <div class="container">
             <div class="order-card">
@@ -361,12 +361,12 @@
                     </div>
 
                     <form id="orderForm" class="order-form">
+                        <!-- Datos de Contacto -->
                         <div class="form-group">
                             <label for="nombre">Nombre y Apellido *</label>
                             <input type="text" id="nombre" name="nombre" required placeholder="Ej: Roberto Muñoz">
                         </div>
 
-                        <!-- Input de Teléfono con Prefijo Fijo +56 -->
                         <div class="form-group">
                             <label for="telefono">Teléfono / WhatsApp *</label>
                             <div class="phone-input-group">
@@ -375,7 +375,7 @@
                             </div>
                         </div>
 
-                        <!-- Selector hasta 4 Kits -->
+                        <!-- Cantidad de Taladro -->
                         <div class="form-group">
                             <label for="cantidad">Cantidad y Oferta Taladro *</label>
                             <select id="cantidad" name="cantidad">
@@ -386,18 +386,8 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="direccion">Dirección exacta (Calle, Número, Depto/Casa) *</label>
-                            <input type="text" id="direccion" name="direccion" required placeholder="Ej: Av. Las Flores 450, Depto 302">
-                        </div>
-
+                        <!-- Paso 1: Ubicación Geográfica Primero (Región y Comuna Dependiente) -->
                         <div class="form-row-2">
-                            <div class="form-group">
-                                <label for="comuna">Comuna / Ciudad *</label>
-                                <input type="text" id="comuna" name="comuna" required placeholder="Ej: Maipú / Concepción">
-                            </div>
-
-                            <!-- Menú Desplegable de Regiones de Chile -->
                             <div class="form-group">
                                 <label for="region">Región *</label>
                                 <select id="region" name="region" required>
@@ -420,6 +410,24 @@
                                     <option value="Magallanes">Magallanes</option>
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="comuna">Comuna *</label>
+                                <select id="comuna" name="comuna" required disabled>
+                                    <option value="" disabled selected>Primero elige región</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dirección Dividida: Obligatoria y Referencia Opcional -->
+                        <div class="form-group">
+                            <label for="calle_numero">Calle y Número *</label>
+                            <input type="text" id="calle_numero" name="calle_numero" required placeholder="Ej: Av. Las Flores 450">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="referencia">Depto, Casa, Block o Referencia (Opcional)</label>
+                            <input type="text" id="referencia" name="referencia" placeholder="Ej: Depto 302, Condominio El Roble, portón blanco">
                         </div>
 
                         <!-- Recuadro Order Bump con Foto del Kit Galletera -->
@@ -442,7 +450,7 @@
                                 </div>
                                 <div class="bump-text-wrap">
                                     <p class="bump-description">
-                                        <strong>Kit Mini Galletera Angular 12V Brushless:</strong> 19.500 RPM sin escobillas. Incluye <strong>2 baterías de litio</strong>, maletín rígido, cargador rápido, discos de corte diamantados y llave. Corta PVC, perfiles, cerámica y madera sin cables.
+                                        <strong>Kit Mini Galletera Angular 12V Brushless:</strong> 19.500 RPM sin escobillas. Incluye <strong>2 baterías de litio</strong>, maletín rígido, cargador rápido, discos diamantados y llave. Corta PVC, perfiles, cerámica y madera sin cables.
                                     </p>
                                 </div>
                             </div>
