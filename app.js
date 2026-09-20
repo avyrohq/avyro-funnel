@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // URL de tu Google Apps Script (/exec)
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlQoPITzLr6XQejLSXONmCvoC1madPgPT_JZUBLJp6_vvafxDjB-Lt0fkPZRfFZ6uW5Q/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwP0CclpOfSFUV7cHCna3M0PiVKjQDeu11hjrbI5ujnsS7S9XZwpewfA53paIOqZamPcw/exec';
 
   // Precios del Taladro por cantidad
   const PRECIOS_MAP = {
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Acordeón FAQ
+  // 2. Acordeón FAQ[cite: 9]
   const accordionHeaders = document.querySelectorAll('.accordion-header');
   accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Slider Dinámico de Reseñas
+  // 3. Slider Dinámico de Reseñas[cite: 9]
   const slides = document.querySelectorAll('.review-slide');
   const dots = document.querySelectorAll('.slider-dots .dot');
   const prevBtn = document.getElementById('prevReviewBtn');
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 7000);
   }
 
-  // 4. Autoformateador de Teléfono (9 1234 5678)
+  // 4. Autoformateador de Teléfono (9 1234 5678)[cite: 9]
   const telefonoInput = document.getElementById('telefono');
   if (telefonoInput) {
     telefonoInput.addEventListener('input', (e) => {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Actualización dinámica del total según cantidad y Order Bump
+  // 5. Actualización dinámica del total según cantidad y Order Bump[cite: 9]
   const cantidadSelect = document.getElementById('cantidad');
   const addGalleteraCheckbox = document.getElementById('addGalletera');
   const summaryProductName = document.getElementById('summaryProductName');
@@ -227,31 +227,31 @@ document.addEventListener('DOMContentLoaded', () => {
       const regionVal = regionSelect ? regionSelect.value : '';
       const comunaVal = comunaSelect ? comunaSelect.value : '';
 
+      // Unificar calle y referencia para que la columna "Dirección" de tu Sheet lo tenga todo
       const direccionCompleta = referenciaVal ? `${calleNumeroVal} (${referenciaVal})` : calleNumeroVal;
 
+      // Descripción del producto para la columna "Producto" de tu Sheet
       const productoFinal = incluyeGalletera 
         ? `${qty}x Taladro 48V + 1x Mini Galletera 12V (Combo)` 
         : `${qty}x Taladro inalámbrico 48v`;
 
+      // Los datos organizados para llenar exactamente las columnas A hasta I de tu Sheet
       const formData = {
+        fecha: new Date().toLocaleString('es-CL'),
+        producto: productoFinal,
         nombre: (document.getElementById('nombre').value || '').trim(),
         telefono: telefonoLimpio,
         cantidad: qty,
-        galletera: incluyeGalletera ? 'SÍ' : 'NO',
         total: totalPagar,
-        region: regionVal,
-        comuna: comunaVal,
-        calle_numero: calleNumeroVal,
-        referencia: referenciaVal,
         direccion: direccionCompleta,
-        producto: productoFinal,
-        fecha: new Date().toLocaleString('es-CL')
+        comuna: comunaVal,
+        region: regionVal
       };
 
-      // Guardar resumen en sessionStorage para mostrarlo en gracias.html
+      // Guardar datos en sessionStorage para que gracias.html muestre el resumen al cliente
       sessionStorage.setItem('avyro_last_order', JSON.stringify(formData));
 
-      // Envío asíncrono a Google Sheets sin bloquear la navegación
+      // Envío en segundo plano a Google Sheets
       if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('PEGA_AQUI')) {
         fetch(APPS_SCRIPT_URL, {
           method: 'POST',
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).catch(errFetch => console.warn('Fetch error:', errFetch));
       }
 
-      // Redirección directa a la pantalla de agradecimiento
+      // Redirigir a la pantalla de éxito
       setTimeout(() => {
         window.location.href = 'gracias.html';
       }, 400);
